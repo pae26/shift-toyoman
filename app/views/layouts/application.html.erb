@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Toyoman</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= include_gon %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <div class="wrap">
+      <div id="wrapper">
+        <header>
+            <!--<h1 id="title">豊萬シフト共有・管理</h1>-->
+            <img src="/assets/logo.png" id="logo">
+            
+            <% if @login_user %>
+            <nav class="nav">
+                <div class="nav_menu">
+                  <%= link_to("ホーム", "/pages/home") %>
+                </div>
+                <div class="nav_menu">
+                  <%= link_to("使い方", "/pages/usage") %>
+                </div>
+                <div class="nav_menu">
+                  <%= link_to("ご意見",  "/pages/inquiry") %>
+                </div>
+                <div class="nav_menu">
+                    <a href="change_password.php">パスワード変更</a>
+                </div>
+                <!--<?php 
+                if($_SESSION['id']==1){
+                    echo '<div class="form_block">';
+                    echo '<a href="register.php" class="footer_menu">従業員編集</a>';
+                    echo '</div>';
+                } ?>-->
+                <div class="nav_menu">
+                    <%= link_to("ログアウト", "/auth/logout") %>
+                </div>
+            </nav>
+            <% end %>
+        </header>
+
+        <% if @login_user %>
+          <p class="login_now" id="<%= @login_user[:name] %>">ログイン中：<%= @login_user[:name] %>さん</p>
+        <% end %>
+            
+        <%= yield %>
+      </div>
+      <footer>
+          <div id="copyright">©︎2020 Songju Pae</div>
+      </footer>
+    </div>
+  </body>
+</html>

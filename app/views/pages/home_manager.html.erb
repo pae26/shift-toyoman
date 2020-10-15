@@ -1,0 +1,94 @@
+<div class="headline_div">
+    <h2 class="headline">　<%= @month_info[:next_month] %>月シフト編集　</h2>
+</div>
+
+<%
+    next_month = @month_info[:next_month].to_i
+    this_month = @month_info[:this_month].to_i
+    next_end_month_day = @month_info[:next_end_month_day].to_i
+    this_end_month_day = @month_info[:this_end_month_day].to_i
+    weeks = @month_info[:weeks]
+    is_month_12 = next_month == 12
+    if is_month_12
+        year = 1
+    else
+        year = @month_info[:this_year].to_i
+    end
+%>
+<div class="scroll">
+    <table class="manage-shift" cellspacing="0">
+        <tr>
+            <th rowspan="2" id="month"><%= @month_info[:next_month] %>月</th>
+            <% for i in 1..next_end_month_day %>
+                <td class="day"><%= i %></td>
+            <% end %>
+        </tr>
+        <tr>
+            <% for i in 1..next_end_month_day %>
+                <% week = Date.new(year, next_month, i) %>
+                <% if week.wday == 0 %>
+                    <td class="week sunday"><%= weeks[week.wday] %></td>
+                <% elsif week.wday == 6 %>
+                    <td class="week saturday"><%= weeks[week.wday] %></td>
+                <% else %>
+                    <td class="week"><%= weeks[week.wday] %></td>
+                <% end %>
+            <% end %>
+            <% @shift_all_next_month.each do |shift_one_next_month| %>
+                <%
+                user_id = shift_one_next_month.user_id
+                user_name = @user_id_name[user_id.to_s.to_sym]
+                %>
+                <tr>
+                    <th class="employee" id=<%= user_id %>><%= user_name %>
+                    <% for i in 1..next_end_month_day %>
+                    <% day_sym = ("day#{i}").to_sym %>
+                        <td id="<%= user_id %>_<%= i %>"><%= shift_one_next_month[day_sym] %></td>
+                    <% end %>
+                </tr>
+            <% end %>
+
+        </tr>
+    </table>
+</div>
+
+<div class="headline_div">
+    <h2 class="headline">　<%= @month_info[:this_month] %>月シフト表　</h2>
+</div>
+
+<div class="scroll">
+    <table class="manage-shift" cellspacing="0">
+        <tr>
+            <th rowspan="2" id="month"><%= @month_info[:this_month] %>月</th>
+            <% for i in 1..this_end_month_day %>
+                <td class="day"><%= i %></td>
+            <% end %>
+        </tr>
+        <tr>
+            <% for i in 1..this_end_month_day %>
+                <% week = Date.new(year, this_month, i) %>
+                <% if week.wday == 0 %>
+                    <td class="week sunday"><%= weeks[week.wday] %></td>
+                <% elsif week.wday == 6 %>
+                    <td class="week saturday"><%= weeks[week.wday] %></td>
+                <% else %>
+                    <td class="week"><%= weeks[week.wday] %></td>
+                <% end %>
+            <% end %>
+            <% @shift_all_this_month.each do |shift_one_this_month| %>
+                <%
+                user_id = shift_one_this_month.user_id
+                user_name = @user_id_name[user_id.to_s.to_sym]
+                %>
+                <tr>
+                    <th class="employee" id=<%= user_id %>><%= user_name %>
+                    <% for i in 1..this_end_month_day %>
+                    <% day_sym = ("day#{i}").to_sym %>
+                        <td id="<%= user_id %>_<%= i %>"><%= (shift_one_this_month[day_sym] == nil || shift_one_this_month[day_sym] == "×") ? "休" : shift_one_this_month[day_sym] %></td>
+                    <% end %>
+                </tr>
+            <% end %>
+
+        </tr>
+    </table>
+</div>
