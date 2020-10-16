@@ -422,7 +422,6 @@ div.select_day_time,#all,#login_info,#logout,#register,#change_form,#pass_change
 .shift-select, .shift-details {
 	background-color: #fff;	/* 背景色 */
 	border: 1px solid #ccc; /* 線の太さ・種類・色 */
-	box-shadow: 0 3px 10px #c1ced7;
 	margin: 30px auto; /* 外側の余白 上下・左右 */
 	padding: 30px 20px 20px 20px; /* 内側の余白 上・右・下・左 */
 	position: relative;
@@ -435,7 +434,7 @@ div.select_day_time,#all,#login_info,#logout,#register,#change_form,#pass_change
 	background-color: #404f70; /* マステ部分の色1 */
 	background-position: 0 0, 12px 12px;
 	background-size: 24px 24px;
-	box-shadow: 0 3px 5px #c1ced7;;
+	/*box-shadow: 0 3px 5px #c1ced7;*/
 	display: block;
 	margin: 0 0 10px 0;
 	padding: 5px 20px;
@@ -596,7 +595,7 @@ span.msg {
 html.modalset {
     overflow: hidden;
 }
-.submit-modal {
+.submit-modal, .select-modal, .determine-modal {
     display: none;
     width: 100%;
     height: 100vh;
@@ -605,7 +604,7 @@ html.modalset {
     top: 0;
     z-index: 9999;
 }
-.submit-modal-wrap {
+.submit-modal-wrap, .select-modal-wrap, .determine-modal-wrap {
     width: 100%;
     height: 100%;
     text-align: center;
@@ -616,7 +615,7 @@ html.modalset {
     overflow: -moz-scrollbars-none;
     white-space: nowrap;
 }
-.submit-modal-wrap::-webkit-scrollbar {
+.submit-modal-wrap::-webkit-scrollbar, .select-modal-wrap::-webkit-scrollbar, .determine-modal-wrap::-webkit-scrollbar {
     display: none;
 }
 .submit-modal-wrap:after {
@@ -651,3 +650,33 @@ html.modalset {
 }
 .submit-modal-box　.submit-modal-close {
 }
+
+
+.select-modal-wrap:after, .determine-modal-wrap:after {
+    content: '';
+    display: inline-block;
+    vertical-align: middle;
+    width: 1px;
+    height: 100%;
+}
+.select-modal-bg, .determine-modal-bg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: rgba(51, 51, 51, 0.8);
+    width: 100%;
+    height: 100%;
+}
+.shift-select, .shift-details {
+    background: #fff;
+    padding: 80px 20px;
+    border-radius: 10px;
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+}
+/*.select-modal-box .inner > :first-child {
+    margin-top: 0;
+}
+.select-modal-box　.select-modal-close {
+}*/

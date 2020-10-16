@@ -81,8 +81,9 @@ $(function(){
                 }
                 $('span .shift-time').attr('id', 'select-time' + day)
             }
+            $('#selectModal').fadeIn(200);
+            $('html').addClass('modalset');
             $('.shift-select').show();
-            //$('#determine-day' + day).show();
             $('.shift-select').attr("data-selectday", day + "日");
             $('.shift-select').attr("id", "select-day" + day);
         }).fail(function(data){
@@ -91,6 +92,11 @@ $(function(){
         //$('.shift-select').hide();
         //$('#select-day' + day).show();
         //$('#select-day' + day).attr("data-selectday", day + "日");
+    });
+    $('.select-modal .select-modal-bg,.select-modal .select-modal-close').on('click', function(){
+        $('.shift-time').html("希望時間を選択");
+        $('#selectModal').fadeOut(200);
+        $('html').removeClass('modalset');
     });
 
     /*Dropdown Menu*/
@@ -221,11 +227,19 @@ $(function(){
                     '</tr>'
                 );
             }
+            $('#determineModal').fadeIn(200);
+            $('html').addClass('modalset');
             $('.shift-details').show();
             //$('#determine-day' + day).show();
             $('.shift-details').attr("data-determineday", day + "日");
         }).fail(function(data){
             alert('通信失敗', data);
         });
+    });
+
+    $('.determine-modal .determine-modal-bg, .determine-modal .determine-modal-close').on('click', function(){
+        $('.shift-time').html("希望時間を選択");
+        $('#determineModal').fadeOut(200);
+        $('html').removeClass('modalset');
     });
 });
