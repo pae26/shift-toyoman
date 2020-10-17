@@ -52,6 +52,66 @@ footer{
     float: right;
     margin-top: 60px;
 }
+.form {
+    max-width: 600px;
+    margin: 50px auto;
+    background-color: white;
+    box-shadow: 0 3px 10px #c1ced7;
+}
+#employee_num, #password{
+    margin: 10px 0 20px 0;
+}
+.form-heading {
+    font-weight: 300;
+    margin: 60px 0 20px;
+    font-size: 48px;
+    color: #bcc8d4;
+}
+.form-body {
+    padding: 30px;
+}
+.form-error {
+    color: #ff4d75;
+}
+.form input {
+    width: 95%;
+    border: 1px solid #d8dadf;
+    padding: 10px;
+    color: #57575f;
+    font-size: 16px;
+    letter-spacing: 2px;
+    border-radius: 2px;
+}
+.form textarea {
+    width: 100%;
+    min-height: 110px;
+    font-size: 16px;
+    letter-spacing: 2px;
+}
+.form input[type="submit"] {
+    background-color: #404f70;
+    color: white;
+    cursor: pointer;
+    font-weight: 300;
+    width: 120px;
+    border-radius: 2px;
+    margin-top: 8px;
+    margin-bottom: 0;
+    float: right;
+}
+.form-body:after {
+    content: '';
+    display: table;
+    clear: both;
+}
+.user_shift {
+    min-height: 30px;
+    font-size: 15px;
+}
+.user_rest {
+    min-height: 30px;
+    margin-bottom: 3px;
+}
 
 
 

@@ -41,12 +41,13 @@ class PagesController < ApplicationController
     gon.month_info = @month_info
 
     if @login_user.user_id == 1
-      redirect_to action: :home_manager, month_info: @month_info
+      redirect_to action: :home_manager, month_info: @month_info, data: {"turbolinks" => false}
     end
 
   end
 
   def home_manager
+    gon.login_user_id = @login_user.user_id
     @shift_all_next_month = NextMonth.all.order(user_id: "ASC")
     @shift_all_this_month = ThisMonth.all.order(user_id: "ASC")
     @user_id_name = {}
@@ -87,7 +88,7 @@ class PagesController < ApplicationController
   def select_day
     return nil if params[:id] == ""
     login_user_id = @login_user.user_id
-    users = NextMonth.all  #where.not(user_id: @login_user.user_id)
+    users = NextMonth.where("user_id >= ?", 5)  #where.not(user_id: @login_user.user_id)
     users_id = users.select('user_id')
     users_shift = {}
     day_sym = params[:day].to_s.to_sym
@@ -132,5 +133,22 @@ class PagesController < ApplicationController
   end
 
   def inquiry
+  end
+
+  def change_password
+
+  end
+
+  def changed_password
+    user = User.find_by(user_id: @login_user.user_id)
+    if params[:new_password]  ==  params[:re_new_password]
+      user.update(pass: params[:new_password])
+      user.save
+      flash[:notice] = "パスワードを変更しました！"
+    else
+      flash[:notice] = "確認用パスワードと一致しません"
+    end
+
+    redirect_to "/pages/change_password"
   end
 end

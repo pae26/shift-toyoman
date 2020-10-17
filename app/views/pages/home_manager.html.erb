@@ -1,6 +1,10 @@
+<%= javascript_include_tag "home_manager" %>
+
 <div class="headline_div">
     <h2 class="headline">　<%= @month_info[:next_month] %>月シフト編集　</h2>
 </div>
+
+<div id="not_edit" style="text-align: center;"><h2></h2></div>
 
 <%
     next_month = @month_info[:next_month].to_i
@@ -16,47 +20,67 @@
     end
 %>
 <div class="scroll">
-    <table class="manage-shift" cellspacing="0">
-        <tr>
-            <th rowspan="2" id="month"><%= @month_info[:next_month] %>月</th>
-            <% for i in 1..next_end_month_day %>
-                <td class="day"><%= i %></td>
-            <% end %>
-        </tr>
-        <tr>
-            <% for i in 1..next_end_month_day %>
-                <% week = Date.new(year, next_month, i) %>
-                <% if week.wday == 0 %>
-                    <td class="week sunday"><%= weeks[week.wday] %></td>
-                <% elsif week.wday == 6 %>
-                    <td class="week saturday"><%= weeks[week.wday] %></td>
-                <% else %>
-                    <td class="week"><%= weeks[week.wday] %></td>
+    <div class="table-item">
+        <table class="manage-shift" cellspacing="0">
+            <tr>
+                <th rowspan="2" id="month"><%= @month_info[:next_month] %>月</th>
+                <% for i in 1..next_end_month_day %>
+                    <td class="day"><%= i %></td>
                 <% end %>
-            <% end %>
-            <% @shift_all_next_month.each do |shift_one_next_month| %>
-                <%
-                user_id = shift_one_next_month.user_id
-                user_name = @user_id_name[user_id.to_s.to_sym]
-                %>
-                <tr>
-                    <th class="employee" id=<%= user_id %>><%= user_name %>
-                    <% for i in 1..next_end_month_day %>
-                    <% day_sym = ("day#{i}").to_sym %>
-                        <td id="<%= user_id %>_<%= i %>"><%= shift_one_next_month[day_sym] %></td>
+            </tr>
+            <tr>
+                <% for i in 1..next_end_month_day %>
+                    <% week = Date.new(year, next_month, i) %>
+                    <% if week.wday == 0 %>
+                        <td class="week sunday"><%= weeks[week.wday] %></td>
+                    <% elsif week.wday == 6 %>
+                        <td class="week saturday"><%= weeks[week.wday] %></td>
+                    <% else %>
+                        <td class="week"><%= weeks[week.wday] %></td>
                     <% end %>
-                </tr>
-            <% end %>
+                <% end %>
+                <% @shift_all_next_month.each do |shift_one_next_month| %>
+                    <%
+                    user_id = shift_one_next_month.user_id
+                    user_name = @user_id_name[user_id.to_s.to_sym]
+                    %>
+                    <tr>
+                        <th class="employee" id=<%= user_id %>><%= user_name %>
+                        <% for i in 1..next_end_month_day %>
+                        <% day_sym = ("day#{i}").to_sym %>
+                        
+                        <td id="<%= user_id %>_<%= i %>">
+                            <div class="edit-dropdown">
+                                <div class="select">
+                                    <span class="edit-shift-time"><%= shift_one_next_month[day_sym] %></span>
+                                </div>
+                                <input type="hidden" name="edit-select-time">
+                                <ul class="edit-dropdown-menu">
+                                    <li value="×">×</li>
+                                    <li value="16:30">16:30</li>
+                                    <li value="17:00">17:00</li>
+                                    <li value="17:30">17:30</li>
+                                    <li value="18:00">18:00</li>
+                                    <li value="18:30">18:30</li>
+                                </ul>
+                            </div>
+                        </td>
+                        
+                        <% end %>
+                    </tr>
+                <% end %>
 
-        </tr>
-    </table>
+            </tr>
+        </table>
+    </div>
 </div>
+
 
 <div class="headline_div">
     <h2 class="headline">　<%= @month_info[:this_month] %>月シフト表　</h2>
 </div>
 
-<div class="scroll">
+<div class="scroll-determine">
     <table class="manage-shift" cellspacing="0">
         <tr>
             <th rowspan="2" id="month"><%= @month_info[:this_month] %>月</th>

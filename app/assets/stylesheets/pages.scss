@@ -19,8 +19,8 @@ h1{
 h3{
     margin-bottom: 0;
 }
-p{
-    margin-left: 10px;
+#new_password, #re_new_password {
+    margin: 10px 0 20px 0;
 }
 p.login_now{
     text-align: right;
@@ -35,14 +35,22 @@ p.login_now{
     overflow-x:scroll;
     text-align:center;
     table-layout:fixed;
+    padding-bottom: 150px;
+    box-shadow: 0 3px 10px #c1ced7;
 }
-.scroll{
+.scroll, .scroll-determine{
     overflow: auto;
     white-space: nowrap;
     width:auto;
     margin-left: 30px;
     margin-right: 30px;
+    z-index: 1;
+}
+.scroll-determine {
     box-shadow: 0 3px 10px #c1ced7;
+}
+.table-item {
+    padding: 5px 5px 150px 5px;
 }
 .manage-shift th{
     width:100px;
@@ -62,7 +70,8 @@ p.login_now{
     table-layout: fixed;
 }
 table .employee{
-    background-color:#e1e1e1
+    background-color:#e1e1e1;
+    z-index: 3;
 }
 .day,.week{
     background-color: #8798bb !important;/*#a2afca;*/
@@ -238,6 +247,55 @@ div.select_day_time,#all,#login_info,#logout,#register,#change_form,#pass_change
     color: #2848ff;
 }
 
+.form {
+    max-width: 600px;
+    margin: 50px auto;
+    background-color: white;
+    box-shadow: 0 3px 10px #c1ced7;
+}
+.form-heading {
+    font-weight: 300;
+    margin: 60px 0 20px;
+    font-size: 48px;
+    color: #bcc8d4;
+}
+.form-body {
+    padding: 30px;
+}
+.form-error {
+    color: #ff4d75;
+}
+.form input {
+    width: 95%;
+    border: 1px solid #d8dadf;
+    padding: 10px;
+    color: #57575f;
+    font-size: 16px;
+    letter-spacing: 2px;
+    border-radius: 2px;
+}
+.form textarea {
+    width: 100%;
+    min-height: 110px;
+    font-size: 16px;
+    letter-spacing: 2px;
+}
+.form input[type="submit"] {
+    background-color: #404f70;
+    color: white;
+    cursor: pointer;
+    font-weight: 300;
+    width: 120px;
+    border-radius: 2px;
+    margin-top: 8px;
+    margin-bottom: 0;
+    float: right;
+}
+.form-body:after {
+    content: '';
+    display: table;
+    clear: both;
+}
 
 //boot.css
 /*h1 {
@@ -304,66 +362,6 @@ div.select_day_time,#all,#login_info,#logout,#register,#change_form,#pass_change
 }
 
 
-
-
-
-.form {
-    max-width: 600px;
-    margin: 50px auto;
-    background-color: white;
-    box-shadow: 0 3px 10px #c1ced7;
-}
-.form-heading {
-    font-weight: 300;
-    margin: 60px 0 20px;
-    font-size: 48px;
-    color: #bcc8d4;
-}
-.form-body {
-    padding: 30px;
-}
-.form-error {
-    color: #ff4d75;
-}
-.form input {
-    width: 100%;
-    border: 1px solid #d8dadf;
-    padding: 10px;
-    color: #57575f;
-    font-size: 16px;
-    letter-spacing: 2px;
-    border-radius: 2px;
-}
-.form textarea {
-    width: 100%;
-    min-height: 110px;
-    font-size: 16px;
-    letter-spacing: 2px;
-}
-.form input[type="submit"] {
-    background-color: #404f70;
-    color: white;
-    cursor: pointer;
-    font-weight: 300;
-    width: 120px;
-    border-radius: 2px;
-    margin-top: 8px;
-    margin-bottom: 0;
-    float: right;
-}
-.form-body:after {
-    content: '';
-    display: table;
-    clear: both;
-}
-.user_shift {
-    min-height: 30px;
-    font-size: 15px;
-}
-.user_rest {
-    min-height: 30px;
-    margin-bottom: 3px;
-}
 
 .shift-select, .shift-details {
     display: none;
@@ -680,3 +678,76 @@ html.modalset {
 }
 .select-modal-box　.select-modal-close {
 }*/
+
+
+
+.edit-dropdown {
+    width: 100%;
+    display: inline-block;
+    background-color: #fff;
+    border: none;
+    /*border-radius: 2px;*/
+    /*box-shadow: 0 0 2px rgb(126, 126, 126);*/
+    transition: all .5s ease;
+    position: relative;
+    font-size: 14px;
+    color: #474747;
+    height: 100%;
+}
+.edit-dropdown .select {
+    cursor: pointer;
+    display: block;
+    padding: 10px
+}
+.edit-dropdown .select > i {
+    font-size: 13px;
+    color: #888;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+    float: right;
+    line-height: 20px
+}
+.edit-dropdown:hover {
+    box-shadow: 0 0 4px rgb(204, 204, 204)
+}
+.edit-dropdown:active {
+    background-color: #f8f8f8
+}
+.edit-dropdown.active:hover,
+.edit-dropdown.active {
+    box-shadow: 0 0 4px rgb(204, 204, 204);
+    border-radius: 2px 2px 0 0;
+    background-color: #f8f8f8
+}
+.edit-dropdown.active .select > i {
+    transform: rotate(-90deg)
+}
+.edit-dropdown .edit-dropdown-menu {
+    position: absolute;
+    background-color: #fff;
+    width: 100%;
+    left: 0;
+    margin-top: 1px;
+    box-shadow: 0 1px 2px rgb(204, 204, 204);
+    border-radius: 0 1px 2px 2px;
+    overflow: hidden;
+    display: none;
+    max-height: 144px;
+    overflow-y: auto;
+    z-index: 9
+}
+.edit-dropdown .edit-dropdown-menu li {
+    padding: 10px;
+    transition: all .2s ease-in-out;
+    cursor: pointer;
+} 
+.edit-dropdown .edit-dropdown-menu {
+    padding: 0;
+    list-style: none;
+}
+.edit-dropdown .edit-dropdown-menu li:hover {
+    background-color: #f2f2f2
+}
+.edit-dropdown .edit-dropdown-menu li:active {
+    background-color: #e2e2e2
+}

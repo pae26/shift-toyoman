@@ -1,4 +1,6 @@
-<div class="test">ajax</div>
+<!--<div class="test">ajax</div>-->
+
+<%= javascript_include_tag "home" %>
 
 <div class="headline_div">
     <h2 class="headline">　<%= @month_info[:next_month] %>月シフト提出　</h2>
@@ -69,8 +71,8 @@
                         <div class="container">
                             <div class="dropdown">
                                 <div class="select">
-                                <span class="shift-time">希望時間を選択</span>
-                                <i class="fa fa-chevron-left"></i>
+                                    <span class="shift-time">希望時間を選択</span>
+                                    <i class="fa fa-chevron-left"></i>
                                 </div>
                                 <input type="hidden" name="select-time">
                                 <ul class="dropdown-menu">

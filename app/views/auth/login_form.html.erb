@@ -1,16 +1,20 @@
+<%= flash[:logout] %>
+<%= flash[:error] %>
+
 <div class="form users-form">
     <div class="form-body">
-    <% if @error_message %>
-        <div class="form-error">
-        <%= @error_message %>
-        </div>
-    <% end %>
+        <% if @error_message %>
+            <div class="form-error">
+            <%= @error_message %>
+            </div>
+        <% end %>
 
-    <%= form_tag("/auth/login") do %>
-        <p>従業員番号</p>
-        <input name="employee_num">
-        <p>パスワード</p>
-        <input type="password" name="password">
-        <input type="submit" value="ログイン">
-    <% end %>
+        <%= form_with url: "/auth/login" do |form| %>
+            <%= form.label "従業員番号", class: "form-num" %>
+            <%= form.text_field :employee_num %>
+            <%= form.label "パスワード", class: "form-pass" %>
+            <%= form.password_field :password %>
+            <%= form.submit "ログイン" %>
+        <% end %>
+    </div>
 </div>
