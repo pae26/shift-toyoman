@@ -21,7 +21,7 @@ $(function(){
                     clearInterval(timer);
                     $('#countOutput').text("提出期限が過ぎました");
                     if(login_user_id != 1){
-                        $('#submit,.select_day_time,.ok_div,#all_div,#limit_text').hide();
+                        $('.submit, .select_day_time, .ok_div,#all_div, #limit_text').hide();
                     }
                 }
             }else{
@@ -69,14 +69,19 @@ $(function(){
                     }
                 }
                 else {
-                    $('.shift-select .select_one_day').append(
-                        '<tr id="' + data.users_shift[user_id].name + '_' + day + '" class="element-select">' +
-                            '<td class="element-name">' + data.users_shift[user_id].name + '</td>' +
-                            '<td class="element-time">' + data.users_shift[user_id].shift + '</td>' +
-                        '</tr>'
-                    );
+                    if(data.users_shift[user_id].shift != "休") {
+                        $('.shift-select .select_one_day').append(
+                            '<tr id="' + data.users_shift[user_id].name + '_' + day + '" class="element-select">' +
+                                '<td class="element-name">' + data.users_shift[user_id].name + '</td>' +
+                                '<td class="element-time">' + data.users_shift[user_id].shift + '</td>' +
+                            '</tr>'
+                        );
+                    }
                 }
-                $('span .shift-time').attr('id', 'select-time' + day)
+                $('span .shift-time').attr('id', 'select-time' + day);
+                if(data.confirmed) {
+                    $('.select-container').hide();
+                }
             }
             $('#selectModal').fadeIn(200);
             $('html').addClass('modalset');
@@ -115,9 +120,7 @@ $(function(){
 
     $('.shift-write').on('click', function(){
         let parents = $(this).parents();
-        console.log(parents);
         let day = parents[1].id.replace("select-day", "");
-        console.log(day);
         let time = $('.shift-time').html();
         let obj_login_user = $('.login_now');
         let login_user_name = obj_login_user[0].id;
@@ -149,8 +152,9 @@ $(function(){
     $('#submit-ok').on('click', function(){
         let submit_shift = {};
         let date = new Date();
-        let next_month_end_day = new Date(date.getFullYear(), date.getMonth() + 2, 0).getDate();
-        for(let i=1; i<=next_month_end_day; i++) {
+        console.log(gon.next_end_month_day);
+        //let next_month_end_day = new Date(date.getFullYear(), date.getMonth() + 2, 0).getDate();
+        for(let i=1; i<=gon.next_end_month_day; i++) {
             submit_shift["day"+i] = $('#shift_' + i).text();
         }
         $.ajax({
@@ -184,7 +188,6 @@ $(function(){
         }).done(function(data){
             $('.shift-details .details_one_day .element-detail').remove();
             for(let user_id in data.users_shift){
-                console.log(data.users_shift[user_id]);
                 $('.shift-details .details_one_day').append(
                     '<tr>' +
                         '<td class="element-detail">' + data.users_shift[user_id].name + '</td>' +

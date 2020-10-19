@@ -14,27 +14,3 @@
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
-// require_tree .
-
-
-$(function(){
-    /*console.log(gon.month_info);*/
-    /*$('.test').on('click', function(){
-        let id=7;
-
-        $.ajax({
-            dataType: 'json',
-            type: 'POST',
-            url: '/ajax',
-            data: {
-                id:id,
-            },
-        }).done(function(data){
-            console.log('通信成功！');
-            console.log(data);
-
-        }).fail(function(){
-            alert('通信失敗');
-        });
-    });*/
-});

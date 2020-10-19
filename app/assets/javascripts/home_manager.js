@@ -2,7 +2,6 @@ $(function(){
     let date = new Date();
     let today = parseInt(date.getDate(), 10);
     if(today < 20) {
-        console.log("aaa");
         $('#not_edit h2').text('20日以降に編集可能です');
     }
     
@@ -18,5 +17,49 @@ $(function(){
     $('.edit-dropdown .edit-dropdown-menu li').on('click', function() {
         $(this).parents('.edit-dropdown').find('span').text($(this).text());
         $(this).parents('.edit-dropdown').find('input').attr('value', $(this).attr('id'));
+    });
+
+    $('#confirm-btn').on('click', function(){
+        $('#confirmModal').fadeIn(200);
+        $('html').addClass('modalset');
+    });
+    $('.confirm-modal .confirm-modal-bg, .confirm-modal .confirm-modal-close').on('click', function(){
+        $('#confirmModal').fadeOut(200);
+        $('html').removeClass('modalset');
+    });
+
+    $('#confirm-ok').on('click', function(){
+        let confirm_shift = {};
+        let get_name = $('.employee_name').text().replace(/(\r|\n)/g, '');
+        let employee_name = get_name.split(/\s+/g);
+        //空文字を除去
+        employee_name.pop();
+        console.log(employee_name);
+        //let next_month_end_day = new Date(date.getFullYear(), date.getMonth() + 2, 0).getDate();
+        for(let i=0; i<gon.employee_count; i++) {
+            confirm_shift["name"] = employee_name[i];
+            confirm_shift["shift"] = {};
+            for(let j=1; j<=gon.next_end_month_day; j++) {
+                shift_one = $('#' + employee_name[i] + '_' + j +' > .edit-dropdown > .select > .edit-shift-time').text();
+                if(shift_one == "" || shift_one == "×") {
+                    shift_one = "休"
+                }
+				confirm_shift["shift"]["day"+j] = shift_one;
+            }
+
+            $.ajax({
+                dataType: 'json',
+                type: 'POST',
+                url: '/confirm_shift',
+                data: {
+                    confirm_shift: confirm_shift,
+                },
+            }).done(function(data){
+                console.log('通信成功！');
+
+            }).fail(function(){
+                alert('通信失敗...');
+            });
+        }
     });
 });

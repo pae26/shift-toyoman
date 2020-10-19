@@ -23,6 +23,38 @@ class PagesController < ApplicationController
       prev_end_month_day = Time.new(this_year, this_month - 1).end_of_month.day
     end
     
+    #月替り時
+    month_changed = false
+    File.open("./app/views/pages/month.txt", "r") do |f|
+      
+      f.each_line do |line|
+        unless line.to_s.gsub(/\R/, "") == this_month.to_s
+          month_changed = true
+          shift_all_next_month = NextMonth.all.order(user_id: "ASC")
+
+          #ThisMonthの値をNextMonthに変えてNextMonthを白紙に
+          shift_all_next_month.each do |user_next_month|
+            user_this_month = ThisMonth.find_by(user_id: user_next_month.user_id)
+            for day in 1..31
+              day_sym = ("day" + day.to_s).to_sym
+              user_this_month[day_sym] = user_next_month[day_sym]
+              user_next_month[day_sym] = ""
+            end
+            user_next_month.save
+            user_this_month.save
+          end
+        end
+      end
+    end
+    if month_changed
+      File.open("./app/views/pages/month.txt", "w") do |f|
+        f.puts(this_month)
+      end
+      File.open("./app/views/pages/confirmed.txt", "w") do |f|
+        f.puts("not")
+      end
+    end
+    
     #日付情報インスタンス変数
     @month_info = {
       weeks: weeks,
@@ -36,20 +68,35 @@ class PagesController < ApplicationController
       next_beginning_month_day: next_beginning_month_day,
       next_end_month_day: next_end_month_day
     }
+    
 
     gon.login_user_id = @login_user.user_id
     gon.month_info = @month_info
+    gon.next_end_month_day = next_end_month_day
+    
 
     if @login_user.user_id == 1
       redirect_to action: :home_manager, month_info: @month_info, data: {"turbolinks" => false}
     end
 
+    @submit_or_confirmed = "提出"
+
+    File.open("./app/views/pages/confirmed.txt", "r") do |f|
+      f.each_line do |line|
+        if line.to_s.gsub(/\R/, "") == "confirmed"
+          @submit_or_confirmed = "表"
+        end
+      end
+    end
   end
 
   def home_manager
-    gon.login_user_id = @login_user.user_id
     @shift_all_next_month = NextMonth.all.order(user_id: "ASC")
     @shift_all_this_month = ThisMonth.all.order(user_id: "ASC")
+    gon.login_user_id = @login_user.user_id
+    gon.employee_count = @shift_all_next_month.length
+    gon.next_end_month_day = params[:month_info][:next_end_month_day]
+
     @user_id_name = {}
     users = User.all.order(user_id: "ASC")
     
@@ -62,7 +109,6 @@ class PagesController < ApplicationController
 
 
   def ajax
-    return nil if params[:id] == ""
     @user = User.find_by(user_id: 7)
 
     respond_to do |format|
@@ -72,23 +118,35 @@ class PagesController < ApplicationController
   end
 
   def submit_shift
-    return nil if params[:id] == ""
     submit_user = NextMonth.find_by(user_id: @login_user.user_id)
     params[:submit_shift].each do |day, shift_time|
       submit_user[day.to_sym] = shift_time
       submit_user.save
     end
-
     respond_to do |format|
       format.html 
-      format.json {render json: {judge: 'success!'}}
+      format.json {render action: :home, json: {judge: 'success!'}}
     end
   end
 
   def select_day
-    return nil if params[:id] == ""
     login_user_id = @login_user.user_id
-    users = NextMonth.where("user_id >= ?", 5)  #where.not(user_id: @login_user.user_id)
+
+    confirmed = false
+    @submit_or_confirmed = "提出"
+    File.open("./app/views/pages/confirmed.txt", "r") do |f|
+      f.each_line do |line|
+        if line.to_s.gsub(/\R/, "") == "confirmed"
+          confirmed = true
+          @submit_or_confirmed = "表"
+        end
+      end
+    end
+    if confirmed
+      users = NextMonth.all
+    else
+      users = NextMonth.where("user_id >= ?", 5)
+    end
     users_id = users.select('user_id')
     users_shift = {}
     day_sym = params[:day].to_s.to_sym
@@ -103,13 +161,13 @@ class PagesController < ApplicationController
       format.json {render json: {
           login_user_id: login_user_id,
           users_shift: users_shift,
+          confirmed: confirmed,
         }
       }
     end
   end
 
   def determine_day
-    return nil if params[:id] == ""
     users = ThisMonth.where.not("#{params[:day]} LIKE ?", "NULL")
     users_id = users.select('user_id')
     users_shift = {}
@@ -129,6 +187,30 @@ class PagesController < ApplicationController
     end
   end
 
+  def confirm_shift
+    File.open("./app/views/pages/confirmed.txt", "w") do |f|
+      f.puts("confirmed")
+    end
+
+    employee = User.find_by(name: params[:confirm_shift]["name"])
+    employee_id = employee.user_id.to_i
+    confirm_user = NextMonth.find_by(user_id: employee_id)
+    
+    params[:confirm_shift]["shift"].each do |day, shift_time|
+      confirm_user[day.to_sym] = shift_time
+      confirm_user.save
+    end
+
+
+    respond_to do |format|
+      format.html 
+      format.json {render action: :home, json: {
+          result: "OK",
+        }
+      }
+    end
+  end
+
   def usage
   end
 
@@ -142,7 +224,7 @@ class PagesController < ApplicationController
   def changed_password
     user = User.find_by(user_id: @login_user.user_id)
     if params[:new_password]  ==  params[:re_new_password]
-      user.update(pass: params[:new_password])
+      user.update(password: params[:new_password])
       user.save
       flash[:notice] = "パスワードを変更しました！"
     else

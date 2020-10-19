@@ -52,6 +52,9 @@ p.login_now{
 .table-item {
     padding: 5px 5px 150px 5px;
 }
+.shift-item {
+    padding: 5px;
+}
 .manage-shift th{
     width:100px;
     height:20px;
@@ -69,7 +72,7 @@ p.login_now{
 .manage-shift tbody{
     table-layout: fixed;
 }
-table .employee{
+table .employee, table .employee_name, table .confirmed_employee_name{
     background-color:#e1e1e1;
     z-index: 3;
 }
@@ -461,7 +464,7 @@ span.msg {
   padding: 5px 0 10px;
   display: inherit
 }
-.container {
+.select-container {
   margin: 50px auto 0;
   text-align: center
 }
@@ -547,10 +550,10 @@ span.msg {
     margin-left: 20px;
 }
 
-.submit {
+.submit, .confirm {
     text-align: center;
 }
-#submit-btn {
+#submit-btn, #confirm-btn {
     width: 300px;
     height: 70px;
     color: #fff;
@@ -560,13 +563,22 @@ span.msg {
     font-weight: 700;
     border-radius: 5px;
     margin-top: 30px;
+    border-top:2px solid rgba(255,255,255,0.2);
+	border-bottom:5px solid rgb(32, 32, 32);
+}
+#submit-btn:active, #confirm-btn:active {
+	-webkit-transform: translate(0,2px);
+	-moz-transform: translate(0,2px);
+	transform: translate(0,2px);
+	border-bottom:none;
 }
 .modal-message {
     font-size: 30px;
     font-weight: 800;
     margin: 10px 0;
 }
-#submit-ok, #submit-cancel {
+#submit-ok, #submit-cancel,
+#confirm-ok, #confirm-cancel {
     width: 200px;
     height: 50px;
     margin: 10px 20px;
@@ -576,13 +588,13 @@ span.msg {
     border-radius: 10px;
     color: #fff;
 }
-#submit-ok {
+#submit-ok, #confirm-ok {
     background-color: #005FFF;
 }
-#submit-cancel {
+#submit-cancel, #confirm-cancel {
     background-color: #FF0000;
 }
-.submit-modal-close {
+.submit-modal-close, .confirm-modal-close {
     display: inline-block;
 }
 
@@ -593,7 +605,10 @@ span.msg {
 html.modalset {
     overflow: hidden;
 }
-.submit-modal, .select-modal, .determine-modal {
+.submit-modal,
+.select-modal,
+.determine-modal,
+.confirm-modal {
     display: none;
     width: 100%;
     height: 100vh;
@@ -602,7 +617,10 @@ html.modalset {
     top: 0;
     z-index: 9999;
 }
-.submit-modal-wrap, .select-modal-wrap, .determine-modal-wrap {
+.submit-modal-wrap,
+.select-modal-wrap,
+.determine-modal-wrap,
+.confirm-modal-wrap {
     width: 100%;
     height: 100%;
     text-align: center;
@@ -613,17 +631,22 @@ html.modalset {
     overflow: -moz-scrollbars-none;
     white-space: nowrap;
 }
-.submit-modal-wrap::-webkit-scrollbar, .select-modal-wrap::-webkit-scrollbar, .determine-modal-wrap::-webkit-scrollbar {
+.submit-modal-wrap::-webkit-scrollbar,
+.select-modal-wrap::-webkit-scrollbar,
+.determine-modal-wrap::-webkit-scrollbar,
+.confirm-modal-wrap::-webkit-scrollbar {
     display: none;
 }
-.submit-modal-wrap:after {
+.submit-modal-wrap:after,
+.confirm-modal-wrap:after {
     content: '';
     display: inline-block;
     vertical-align: middle;
     width: 1px;
     height: 100%;
 }
-.submit-modal-bg {
+.submit-modal-bg,
+.confirm-modal-bg {
     position: absolute;
     left: 0;
     top: 0;
@@ -631,22 +654,26 @@ html.modalset {
     width: 100%;
     height: 100%;
 }
-.submit-modal-box {
+.submit-modal-box,
+.confirm-modal-box {
     width: 100%;
     max-width: 900px;
     display: inline-block;
     vertical-align: middle;
     position: relative;
 }
-.submit-modal-box .inner {
+.submit-modal-box .inner,
+.confirm-modal-box .inner {
     background: #fff;
     padding: 80px 20px;
     border-radius: 10px;
 }
-.submit-modal-box .inner > :first-child {
+.submit-modal-box .inner > :first-child,
+.confirm-modal-box .inner > :first-child {
     margin-top: 0;
 }
-.submit-modal-box　.submit-modal-close {
+.submit-modal-box　.submit-modal-close,
+.confirm-modal-box　.confirm-modal-close {
 }
 
 

@@ -5,7 +5,7 @@ class AuthController < ApplicationController
 
   def login
     @user = User.find_by(user_id: params[:employee_num])
-    if @user.pass == params[:password]
+    if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.user_id
       redirect_to "/pages/home"
     else

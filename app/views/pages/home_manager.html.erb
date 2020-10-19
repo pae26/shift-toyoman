@@ -45,11 +45,11 @@
                     user_name = @user_id_name[user_id.to_s.to_sym]
                     %>
                     <tr>
-                        <th class="employee" id=<%= user_id %>><%= user_name %>
+                        <th class="employee_name" id=<%= user_id %>><%= user_name %>
                         <% for i in 1..next_end_month_day %>
                         <% day_sym = ("day#{i}").to_sym %>
                         
-                        <td id="<%= user_id %>_<%= i %>">
+                        <td id="<%= user_name %>_<%= i %>">
                             <div class="edit-dropdown">
                                 <div class="select">
                                     <span class="edit-shift-time"><%= shift_one_next_month[day_sym] %></span>
@@ -75,6 +75,24 @@
     </div>
 </div>
 
+<div class="confirm">
+    <button type="button" id="confirm-btn">公開する</button>
+</div>
+
+<div id="confirmModal" class="confirm-modal">
+    <div class="confirm-modal-wrap">
+        <div class="confirm-modal-bg"></div>
+        <div class="confirm-modal-box">
+            <div class="inner">
+                <div class="modal-message">
+                    シフトを確定して公開しますか？<br>
+                </div>
+                <div class="confirm-modal-close"><button type="button" id="confirm-cancel">キャンセル</button></div>
+                <div class="confirm-modal-close"><button type="button" id="confirm-ok">公開する</button></div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="headline_div">
     <h2 class="headline">　<%= @month_info[:this_month] %>月シフト表　</h2>
@@ -105,7 +123,7 @@
                 user_name = @user_id_name[user_id.to_s.to_sym]
                 %>
                 <tr>
-                    <th class="employee" id=<%= user_id %>><%= user_name %>
+                    <th class="confirmed_employee_name" id=<%= user_id %>><%= user_name %>
                     <% for i in 1..this_end_month_day %>
                     <% day_sym = ("day#{i}").to_sym %>
                         <td id="<%= user_id %>_<%= i %>"><%= (shift_one_this_month[day_sym] == nil || shift_one_this_month[day_sym] == "×") ? "休" : shift_one_this_month[day_sym] %></td>

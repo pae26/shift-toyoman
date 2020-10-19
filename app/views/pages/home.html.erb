@@ -3,7 +3,7 @@
 <%= javascript_include_tag "home" %>
 
 <div class="headline_div">
-    <h2 class="headline">　<%= @month_info[:next_month] %>月シフト提出　</h2>
+    <h2 class="headline">　<%= @month_info[:next_month] %>月シフト<%= @submit_or_confirmed %>　</h2>
 </div>
 
 <% is_end = false %>
@@ -59,7 +59,7 @@
     <div class="select-modal-wrap">
         <div class="select-modal-bg"></div>
                     <div class="shift-select" data-selectday="">
-                        <div class="table-item">
+                        <div class="shift-item">
                         <table border="0" class="select_one_day">
                             <tr>
                                 <th class="heading">従業員</th>
@@ -68,7 +68,7 @@
                         </table>
                         </div>
 
-                        <div class="container">
+                        <div class="select-container">
                             <div class="dropdown">
                                 <div class="select">
                                     <span class="shift-time">希望時間を選択</span>
@@ -177,7 +177,7 @@
     <div class="determine-modal-wrap">
         <div class="determine-modal-bg"></div>
         <div class="shift-details" data-determineday=''>
-            <div class="table-item">
+            <div class="shift-item">
             <table border="0" class="details_one_day">
                 <tr>
                     <th class="heading">従業員</th>
