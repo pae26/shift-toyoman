@@ -32,9 +32,9 @@
                     <% end %>
                 <% else #翌月分 %>
                     <td class="selected-day data-day=<%= day_count %>" id="day<%= day_count %>">
-                        <%= day_count %>
-                        <br>
-                        <br>
+                        <div class="shift-day">
+                            <%= day_count %>
+                        </div>
                         <% day_symbol = ("day" + day_count.to_s).to_sym %>
                         <% if @shift_next_month[day_symbol] == "×" || @shift_next_month[day_symbol] == "" #休み %>
                             <div class="user_rest" id="shift_<%= day_count %>"><%= @shift_next_month[day_symbol] %></div>
@@ -93,6 +93,102 @@
             </div>
     </div>
 </div>
+
+
+
+<div class="week-all">
+    <button type="button" id="week-all-btn">曜日で選択する</button>
+</div>
+
+<div id="weekAllModal" class="week-all-modal">
+    <div class="week-all-modal-wrap">
+        <div class="week-all-modal-bg"></div>
+            <div class="shift-week-all" data-selectday="">
+                <div class="close-item">
+                    <i class="fas fa-times close"></i>
+                </div>
+
+                <div class="week-all-container">
+                    <div class="dropdown">
+                        <div class="week-all">
+                            <span class="shift-week">曜日を選択</span>
+                            <i class="fa fa-chevron-left"></i>
+                        </div>
+                        <input type="hidden" name="select-time">
+                        <ul class="dropdown-menu">
+                            <li value="月曜日">月曜日</li>
+                            <li value="火曜日">火曜日</li>
+                            <li value="水曜日">水曜日</li>
+                            <li value="木曜日">木曜日</li>
+                            <li value="金曜日">金曜日</li>
+                            <li value="土曜日">土曜日</li>
+                            <li value="日曜日">日曜日</li>
+                        </ul>
+                    </div>
+                    <span class="msg"></span>
+                </div>
+
+                <div class="week-all-container">
+                    <div class="dropdown">
+                        <div class="week-all">
+                            <span class="shift-week-time">希望時間を選択</span>
+                            <i class="fa fa-chevron-left"></i>
+                        </div>
+                        <input type="hidden" name="select-time">
+                        <ul class="dropdown-menu">
+                            <li value="×">×</li>
+                            <li value="16:30">16:30</li>
+                            <li value="17:00">17:00</li>
+                            <li value="17:30">17:30</li>
+                            <li value="18:00">18:00</li>
+                            <li value="18:30">18:30</li>
+                        </ul>
+                    </div>
+                    
+                    <span class="msg"></span>
+                    <i class="fas fa-pen week-all-write"></i>
+                </div>
+            </div>
+    </div>
+</div>
+
+
+
+<div class="blank-all">
+    <button type="button" id="blank-all-btn">空白を埋める</button>
+</div>
+
+<div id="blankAllModal" class="blank-all-modal">
+    <div class="blank-all-modal-wrap">
+        <div class="blank-all-modal-bg"></div>
+            <div class="shift-blank-all" data-selectday="">
+                <div class="close-item">
+                    <i class="fas fa-times close"></i>
+                </div>
+
+                <div class="blank-all-container">
+                    <div class="dropdown">
+                        <div class="blank-all">
+                            <span class="shift-blank">希望時間を選択</span>
+                            <i class="fa fa-chevron-left"></i>
+                        </div>
+                        <input type="hidden" name="select-time">
+                        <ul class="dropdown-menu">
+                            <li value="×">×</li>
+                            <li value="16:30">16:30</li>
+                            <li value="17:00">17:00</li>
+                            <li value="17:30">17:30</li>
+                            <li value="18:00">18:00</li>
+                            <li value="18:30">18:30</li>
+                        </ul>
+                    </div>
+                    <span class="msg"></span>
+                    <i class="fas fa-pen blank-all-write"></i>
+                </div>
+            </div>
+    </div>
+</div>
+
 
 
 <div class="submit">
@@ -154,9 +250,9 @@
                     <% else %>
                         <td class="determine-day data-day=<%= day_count %>">
                     <% end %>
-                        <%= day_count %>
-                        <br>
-                        <br>
+                        <div class="shift-day">
+                            <%= day_count %>
+                        </div>
                         <% day_symbol = ("day" + day_count.to_s).to_sym %>
                         <% if @shift_this_month[day_symbol] == nil || @shift_this_month[day_symbol] == "×" #休み %>
                             <div class="user_rest" id="shift_<%= day_count %>"><%= "休" %></div>

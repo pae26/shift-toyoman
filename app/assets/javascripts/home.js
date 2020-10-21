@@ -42,7 +42,7 @@ $(function(){
 
     $('.selected-day').on('click',function(){
         let day_element = $(this).find("div");
-        let day = (day_element[0].id).replace("shift_","");
+        let day = (day_element[1].id).replace("shift_","");
         $.ajax({
             dataType: 'json',
             type: 'POST',
@@ -126,6 +126,9 @@ $(function(){
         let parents = $(this).parents();
         let day = parents[1].id.replace("select-day", "");
         let time = $('.shift-time').html();
+        if(time == "希望時間を選択") {
+            return false;
+        }
         let obj_login_user = $('.login_now');
         let login_user_name = obj_login_user[0].id;
         //let login_user_name = $('.login_now').attr('id');
@@ -142,6 +145,33 @@ $(function(){
         }*/
 
         $('#shift_' + day).html(time);
+        if(time == "×") {
+            $('#shift_' + day).removeClass('user_shift');
+            $('#shift_' + day).addClass('user_rest');
+        }
+        else {
+            $('#shift_' + day).removeClass('user_rest');
+            $('#shift_' + day).addClass('user_shift');
+        }
+    });
+
+    $('.blank-all-write').on('click', function(){
+        let time = $('.shift-blank').html();
+        console.log(time);
+        if(time == "希望時間を選択") {
+            return false;
+        }
+        for(let i=1;i<=gon.next_end_month_day;i++) {
+            if($('#shift_' + i).text() == "" ) {
+                $('#shift_' + i).html(time);
+                if(time != "×") {
+                    $('#shift_' + i).removeClass('user_rest');
+                    $('#shift_' + i).addClass('user_shift');
+                }
+            }
+        }
+        $('#blankAllModal').fadeOut(200);
+        $('html').removeClass('modalset');
     });
 
     $('#submit-btn').on('click', function(){
@@ -150,6 +180,24 @@ $(function(){
     });
     $('.submit-modal .submit-modal-bg,.submit-modal .submit-modal-close').on('click', function(){
         $('#submitModal').fadeOut(200);
+        $('html').removeClass('modalset');
+    });
+
+    $('#week-all-btn').on('click', function(){
+        $('#weekAllModal').fadeIn(200);
+        $('html').addClass('modalset');
+    });
+    $('.week-all-modal .week-all-modal-bg,.week-all-modal .week-all-modal-close, .close').on('click', function(){
+        $('#weekAllModal').fadeOut(200);
+        $('html').removeClass('modalset');
+    });
+
+    $('#blank-all-btn').on('click', function(){
+        $('#blankAllModal').fadeIn(200);
+        $('html').addClass('modalset');
+    });
+    $('.blank-all-modal .blank-all-modal-bg,.blank-all-modal .blank-all-modal-close, .close').on('click', function(){
+        $('#blankAllModal').fadeOut(200);
         $('html').removeClass('modalset');
     });
 
@@ -181,7 +229,7 @@ $(function(){
 
     $('.determine-day').on('click',function(){
         let day_element = $(this).find("div");
-        let day = (day_element[0].id).replace("shift_", "");
+        let day = (day_element[1].id).replace("shift_", "");
         $.ajax({
             dataType: 'json',
             type: 'POST',

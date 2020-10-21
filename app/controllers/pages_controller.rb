@@ -34,7 +34,6 @@ class PagesController < ApplicationController
     #月替り時
     month_changed = false
     File.open("./app/views/pages/month.txt", "r") do |f|
-      
       f.each_line do |line|
         unless line.to_s.gsub(/\R/, "") == this_month.to_s
           month_changed = true

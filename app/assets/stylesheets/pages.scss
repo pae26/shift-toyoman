@@ -323,7 +323,7 @@ div.select_day_time,
 
 .shift_table td {
     border: 1px solid #ddd;
-    padding: 5px 10px 10px 10px;
+    padding: 5px 10px 15px 10px;
     text-align: center;
     width:50px;
     height:5px;
@@ -342,11 +342,9 @@ div.select_day_time,
     color: #ccc;
 }
 
-/*#calendar {
-    padding : 20px 10px;
-    background-color: #fff;
-    display: inline;
-}*/
+.shift-day {
+    margin-bottom: 20px;
+}
 
 #thisMonth {
     color: #000;
@@ -374,10 +372,6 @@ div.select_day_time,
 
 
 
-.shift-select, .shift-details {
-    display: none;
-    border-radius: 10px;
-}
 .table-item {
     display: block;
     text-align: center;
@@ -404,7 +398,7 @@ div.select_day_time,
 
 
 
-.shift-select, .shift-details {
+.shift-select, .shift-details, .shift-week-all, .shift-blank-all {
 	background-color: #fff;
 	border: 1px solid #ccc;
 	margin: 30px auto;
@@ -414,8 +408,11 @@ div.select_day_time,
     
     max-width: 300px;
     text-align: center;
+
+    display: none;
+    border-radius: 10px;
 }
-.shift-select:after, .shift-details:after {
+.shift-select:after, .shift-details:after, .shift-week-all:after, .shift-blank-all:after {
 	background-color: #404f70;
 	background-position: 0 0, 12px 12px;
 	background-size: 24px 24px;
@@ -448,11 +445,20 @@ span.msg {
   padding: 5px 0 10px;
   display: inherit
 }
-.select-container {
-  margin: 50px auto 20px;
+.week-all-msg, .blank-all-msg {
+    margin: 20px;
+}
+.week-all-write,
+.blank-all-write {
+    margin: 0;
+}
+.select-container,
+.week-all-container,
+.blank-all-container {
+  margin: 10px 20px 10px;
   text-align: center
 }
-.shift-time {
+.shift-time, .shift-week {
     color: rgb(141, 141, 141);
 }
 
@@ -470,12 +476,16 @@ span.msg {
   height: 100%;
   text-align: left
 }
-.dropdown .select {
+.dropdown .select,
+.dropdown .week-all,
+.dropdown .blank-all {
     cursor: pointer;
     display: block;
     padding: 10px
 }
-.dropdown .select > i {
+.dropdown .select > i,
+.dropdown .week-all > i,
+.dropdown .blank-all > i {
     font-size: 13px;
     color: #888;
     cursor: pointer;
@@ -495,7 +505,9 @@ span.msg {
     border-radius: 2px 2px 0 0;
     background-color: #f8f8f8
 }
-.dropdown.active .select > i {
+.dropdown.active .select > i,
+.dropdown.active .week-all > i,
+.dropdown.active .blank-all > i {
     transform: rotate(-90deg)
 }
 .dropdown .dropdown-menu {
@@ -531,13 +543,21 @@ span.msg {
 .fa-pen {
     color: #404f70;
     font-size: 25px;
+}
+.shift-write {
     margin-left: 20px;
 }
 
-.submit, .confirm {
+.submit,
+.confirm,
+.week-all,
+.blank-all {
     text-align: center;
 }
-#submit-btn, #confirm-btn {
+#submit-btn,
+#confirm-btn,
+#week-all-btn,
+#blank-all-btn {
     -webkit-appearance: none;
     width: 300px;
     height: 70px;
@@ -549,9 +569,12 @@ span.msg {
     border-radius: 5px;
     margin-top: 30px;
     border-top:2px solid rgba(255,255,255,0.2);
-	border-bottom:5px solid rgb(32, 32, 32);
+	border-bottom:5px solid rgb(70, 69, 69);
 }
-#submit-btn:active, #confirm-btn:active {
+#submit-btn:active,
+#confirm-btn:active,
+#week-all-btn:active,
+#blank-all-btn:active {
 	-webkit-transform: translate(0,2px);
 	-moz-transform: translate(0,2px);
 	transform: translate(0,2px);
@@ -582,6 +605,12 @@ span.msg {
 .submit-modal-close, .confirm-modal-close {
     display: inline-block;
 }
+#week-all-btn,
+#blank-all-btn {
+    background-color: #7f8dac;
+    border-top:2px solid rgba(255,255,255,0.2);
+	border-bottom:5px solid rgb(119, 119, 119);
+}
 
 
 
@@ -593,7 +622,9 @@ html.modalset {
 .submit-modal,
 .select-modal,
 .determine-modal,
-.confirm-modal {
+.confirm-modal,
+.week-all-modal,
+.blank-all-modal {
     display: none;
     width: 100%;
     height: 100vh;
@@ -605,11 +636,13 @@ html.modalset {
 .submit-modal-wrap,
 .select-modal-wrap,
 .determine-modal-wrap,
-.confirm-modal-wrap {
+.confirm-modal-wrap,
+.week-all-modal-wrap,
+.blank-all-modal-wrap  {
     width: 100%;
     height: 100%;
     text-align: center;
-    padding: 20px;
+    /*padding: 20px;*/
     overflow: auto;
     -webkit-overflow-scrolling: touch;
     -ms-overflow-style: none;
@@ -619,7 +652,9 @@ html.modalset {
 .submit-modal-wrap::-webkit-scrollbar,
 .select-modal-wrap::-webkit-scrollbar,
 .determine-modal-wrap::-webkit-scrollbar,
-.confirm-modal-wrap::-webkit-scrollbar {
+.confirm-modal-wrap::-webkit-scrollbar,
+.week-all-modal-wrap::-webkit-scrollbar,
+.blank-all-modal-wrap::-webkit-scrollbar  {
     display: none;
 }
 .submit-modal-wrap:after,
@@ -657,19 +692,25 @@ html.modalset {
 .confirm-modal-box .inner > :first-child {
     margin-top: 0;
 }
-.submit-modal-box　.submit-modal-close,
+/*.submit-modal-box　.submit-modal-close,
 .confirm-modal-box　.confirm-modal-close {
-}
+}*/
 
 
-.select-modal-wrap:after, .determine-modal-wrap:after {
+.select-modal-wrap:after,
+.determine-modal-wrap:after,
+.week-all-modal-wrap:after,
+.blank-all-modal-wrap:after {
     content: '';
     display: inline-block;
     vertical-align: middle;
     width: 1px;
     height: 100%;
 }
-.select-modal-bg, .determine-modal-bg {
+.select-modal-bg,
+.determine-modal-bg,
+.week-all-modal-bg,
+.blank-all-modal-bg {
     position: absolute;
     left: 0;
     top: 0;
@@ -677,7 +718,10 @@ html.modalset {
     width: 100%;
     height: 100%;
 }
-.shift-select, .shift-details {
+.shift-select,
+.shift-details,
+.shift-week-all,
+.shift-blank-all {
     background: #fff;
     padding: 0;
     border-radius: 10px;
@@ -820,13 +864,14 @@ html.modalset {
         width: 25px;
         font-size: 10px;
         font-weight: 800;
+        padding: 5px 10px;
         /*padding: 5px 15px;*/
     }
-    .user_shift {
-        font-size: 10px;
+    .shift-day {
+        margin-bottom: 15px;
     }
-    .user_rest {
-        min-height: 20px;
+    .user_shift, .user_rest {
+        font-size: 10px;
     }
     .select-modal-wrap, .determine-modal-wrap {
         /*height: 0;*/
@@ -846,11 +891,10 @@ html.modalset {
         font-size: 8px;
         padding: 5px 10px 5px 10px;
     }*/
-    .user_shift {
+    /*.user_shift {
         min-height: 20px;
-        font-size: 8px;
     }
     .user_rest {
         min-height: 20px;
-    }
+    }*/
 }
