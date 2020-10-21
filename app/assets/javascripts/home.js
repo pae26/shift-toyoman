@@ -34,7 +34,11 @@ $(function(){
     }
     limitCounter();
 
+    $('#logo').css('float', 'left');
 
+    $('#menu-toggle').on('click', function(){
+        $('.nav').slideToggle();
+    });
 
     $('.selected-day').on('click',function(){
         let day_element = $(this).find("div");
@@ -95,7 +99,7 @@ $(function(){
         //$('#select-day' + day).show();
         //$('#select-day' + day).attr("data-selectday", day + "日");
     });
-    $('.select-modal .select-modal-bg,.select-modal .select-modal-close').on('click', function(){
+    $('.select-modal .select-modal-bg,.select-modal .select-modal-close, .close').on('click', function(){
         $('.shift-time').html("希望時間を選択");
         $('#selectModal').fadeOut(200);
         $('html').removeClass('modalset');
@@ -205,7 +209,7 @@ $(function(){
         });
     });
 
-    $('.determine-modal .determine-modal-bg, .determine-modal .determine-modal-close').on('click', function(){
+    $('.determine-modal .determine-modal-bg, .determine-modal .determine-modal-close, .close').on('click', function(){
         $('.shift-time').html("希望時間を選択");
         $('#determineModal').fadeOut(200);
         $('html').removeClass('modalset');

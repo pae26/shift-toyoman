@@ -58,36 +58,39 @@
 <div id="selectModal" class="select-modal">
     <div class="select-modal-wrap">
         <div class="select-modal-bg"></div>
-                    <div class="shift-select" data-selectday="">
-                        <div class="shift-item">
-                        <table border="0" class="select_one_day">
-                            <tr>
-                                <th class="heading">従業員</th>
-                                <th class="heading">シフト</th>
-                            </tr>
-                        </table>
-                        </div>
+            <div class="shift-select" data-selectday="">
+                <div class="close-item">
+                    <i class="fas fa-times close"></i>
+                </div>
+                <div class="shift-item">
+                <table border="0" class="select_one_day">
+                    <tr>
+                        <th class="heading">従業員</th>
+                        <th class="heading">シフト</th>
+                    </tr>
+                </table>
+                </div>
 
-                        <div class="select-container">
-                            <div class="dropdown">
-                                <div class="select">
-                                    <span class="shift-time">希望時間を選択</span>
-                                    <i class="fa fa-chevron-left"></i>
-                                </div>
-                                <input type="hidden" name="select-time">
-                                <ul class="dropdown-menu">
-                                    <li value="×">×</li>
-                                    <li value="16:30">16:30</li>
-                                    <li value="17:00">17:00</li>
-                                    <li value="17:30">17:30</li>
-                                    <li value="18:00">18:00</li>
-                                    <li value="18:30">18:30</li>
-                                </ul>
-                            </div>
-                            <i class="fas fa-pen shift-write"></i>
-                            <span class="msg"></span>
+                <div class="select-container">
+                    <div class="dropdown">
+                        <div class="select">
+                            <span class="shift-time">希望時間を選択</span>
+                            <i class="fa fa-chevron-left"></i>
                         </div>
+                        <input type="hidden" name="select-time">
+                        <ul class="dropdown-menu">
+                            <li value="×">×</li>
+                            <li value="16:30">16:30</li>
+                            <li value="17:00">17:00</li>
+                            <li value="17:30">17:30</li>
+                            <li value="18:00">18:00</li>
+                            <li value="18:30">18:30</li>
+                        </ul>
                     </div>
+                    <i class="fas fa-pen shift-write"></i>
+                    <span class="msg"></span>
+                </div>
+            </div>
     </div>
 </div>
 
@@ -177,6 +180,9 @@
     <div class="determine-modal-wrap">
         <div class="determine-modal-bg"></div>
         <div class="shift-details" data-determineday=''>
+            <div class="close-item">
+                <i class="fas fa-times close"></i>
+            </div>
             <div class="shift-item">
             <table border="0" class="details_one_day">
                 <tr>

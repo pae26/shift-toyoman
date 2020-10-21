@@ -9,7 +9,7 @@ class AuthController < ApplicationController
       session[:user_id] = @user.user_id
       redirect_to "/pages/home"
     else
-      flash[:error] = "従業員番号またはパスワードが違います"
+      flash[:error] = "担当者番号またはパスワードが違います"
       redirect_to "/auth/login"
     end
   end

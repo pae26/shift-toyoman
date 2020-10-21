@@ -1,4 +1,10 @@
 $(function(){
+    $('#logo').css('float', 'left');
+
+    $('#menu-toggle').on('click', function(){
+        $('.nav').slideToggle();
+    });
+
     let date = new Date();
     let today = parseInt(date.getDate(), 10);
     if(today < 20) {

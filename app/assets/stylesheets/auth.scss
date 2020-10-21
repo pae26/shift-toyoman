@@ -16,7 +16,7 @@ body{
 }
 header{
     width: 100%;
-    padding:20px 0;
+    /*padding-bottom: 120px;*/
     margin: 0 auto;
     /*text-align: center;*/
     background-color: #404f70;
@@ -47,11 +47,34 @@ footer{
     height: 8%;
     margin-left: 20px;
 }
+/*#app-title {
+    color: #fff;
+    font-weight: 700;
+    font-size: 20px;
+    mari
+}*/
 .nav {
-    display: inline-block;
-    float: right;
-    margin-top: 60px;
+    text-align: right;
+    display: block;
+    margin: 80px 0 0 0;
+    padding-bottom: 20px;
 }
+.flash-logout, .flash-changed {
+    text-align: center;
+    font-weight: 500;
+    background-color: rgb(139, 255, 139);
+}
+/*.check {
+    color: rgb(0, 255, 0);
+}*/
+.flash-error {
+    text-align: center;
+    font-weight: 500;
+    background-color: rgb(255, 151, 151);
+}
+/*.cross {
+    color: rgb(255, 81, 81)
+}*/
 .form {
     max-width: 600px;
     margin: 50px auto;
@@ -116,6 +139,9 @@ footer{
 
 
 @media(max-width:767px){
+    .wrap {
+        padding-bottom: 100px;
+    }
     select,input{
         font-size:16px;
     }

@@ -1,6 +1,14 @@
 class PagesController < ApplicationController
   before_action :set_login_user
+  before_action :ensure_login
 
+  def ensure_login
+    if @login_user == nil
+      flash[:notice] = "ログインしてください"
+      redirect_to("/")
+    end
+  end
+  
   def home
     #シフト情報インスタンス変数
     @shift_this_month = ThisMonth.find_by(user_id: @login_user.user_id)
@@ -226,9 +234,9 @@ class PagesController < ApplicationController
     if params[:new_password]  ==  params[:re_new_password]
       user.update(password: params[:new_password])
       user.save
-      flash[:notice] = "パスワードを変更しました！"
+      flash[:changed] = "パスワードを変更しました！"
     else
-      flash[:notice] = "確認用パスワードと一致しません"
+      flash[:error] = "確認用パスワードと一致しません"
     end
 
     redirect_to "/pages/change_password"

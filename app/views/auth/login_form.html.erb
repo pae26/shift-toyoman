@@ -1,5 +1,11 @@
-<%= flash[:logout] %>
-<%= flash[:error] %>
+<div class="flash-logout">
+    <!--<i class="far fa-check-circle check"></i>-->
+    <%= flash[:logout] %>
+</div>
+<div class="flash-error">
+    <!--<i class="far fa-times-circle cross"></i>-->
+    <%= flash[:error] %>
+</div>
 
 <div class="form users-form">
     <div class="form-body">
@@ -10,7 +16,7 @@
         <% end %>
 
         <%= form_with url: "/auth/login" do |form| %>
-            <%= form.label "従業員番号", class: "form-num" %>
+            <%= form.label "担当者番号", class: "form-num" %>
             <%= form.text_field :employee_num %>
             <%= form.label "パスワード", class: "form-pass" %>
             <%= form.password_field :password %>

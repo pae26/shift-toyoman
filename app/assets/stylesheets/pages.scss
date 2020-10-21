@@ -19,6 +19,10 @@ h1{
 h3{
     margin-bottom: 0;
 }
+#logo {
+    /*float: left;*/
+    margin-top: 25px;
+}
 #new_password, #re_new_password {
     margin: 10px 0 20px 0;
 }
@@ -27,7 +31,11 @@ p.login_now{
     padding-right: 5px;
     background-color: #fff;
     font-size: 15px;
+    font-weight: 800;
     margin: 0;
+}
+#menu-toggle {
+    display: none;
 }
 .manage-shift{
     border-collapse: collapse;
@@ -53,7 +61,7 @@ p.login_now{
     padding: 5px 5px 150px 5px;
 }
 .shift-item {
-    padding: 5px;
+    padding: 15px;
 }
 .manage-shift th{
     width:100px;
@@ -284,6 +292,7 @@ div.select_day_time,#all,#login_info,#logout,#register,#change_form,#pass_change
     letter-spacing: 2px;
 }
 .form input[type="submit"] {
+    -webkit-appearance: none;
     background-color: #404f70;
     color: white;
     cursor: pointer;
@@ -318,7 +327,6 @@ div.select_day_time,#all,#login_info,#logout,#register,#change_form,#pass_change
     text-align: center;
     width:50px;
     height:5px;
-    /*padding:2px 10px;*/
     background-color:#ffffff
 }
 
@@ -384,47 +392,23 @@ div.select_day_time,#all,#login_info,#logout,#register,#change_form,#pass_change
 .element-select, .element-detail {
     font-size: 20px;
 }
-
-@media(max-width: 767px){
-    .form {
-        max-width: 300px;
-    }
-    table td{
-        width: 30px;
-        font-size: 10px;
-        padding: 5px 10px 5px 10px;
-    }
-    .user_shift {
-        font-size: 10px;
-    }
-    .user_rest {
-        min-height: 20px;
-    }
+.close-item {
+    text-align: right;
+    margin: 10px 20px 20px 0;
 }
-
-@media(max-width: 376px){
-    table td{
-        width: 20px;
-        font-size: 8px;
-        padding: 5px 10px 5px 10px;
-    }
-    .user_shift {
-        min-height: 20px;
-        font-size: 8px;
-    }
-    .user_rest {
-        min-height: 20px;
-    }
+.close {
+    font-size: 20px;
+    color: rgb(207, 205, 205);
 }
 
 
 
 
 .shift-select, .shift-details {
-	background-color: #fff;	/* 背景色 */
-	border: 1px solid #ccc; /* 線の太さ・種類・色 */
-	margin: 30px auto; /* 外側の余白 上下・左右 */
-	padding: 30px 20px 20px 20px; /* 内側の余白 上・右・下・左 */
+	background-color: #fff;
+	border: 1px solid #ccc;
+	margin: 30px auto;
+	padding: 0;
 	position: relative;
     z-index: 0;
     
@@ -432,14 +416,14 @@ div.select_day_time,#all,#login_info,#logout,#register,#change_form,#pass_change
     text-align: center;
 }
 .shift-select:after, .shift-details:after {
-	background-color: #404f70; /* マステ部分の色1 */
+	background-color: #404f70;
 	background-position: 0 0, 12px 12px;
 	background-size: 24px 24px;
 	/*box-shadow: 0 3px 5px #c1ced7;*/
 	display: block;
 	margin: 0 0 10px 0;
 	padding: 5px 20px;
-	color: #fff;  /* マステ部分文字色 */
+	color: #fff;
 	text-align: center;
 	position: absolute;
 	top: -10px;
@@ -465,7 +449,7 @@ span.msg {
   display: inherit
 }
 .select-container {
-  margin: 50px auto 0;
+  margin: 50px auto 20px;
   text-align: center
 }
 .shift-time {
@@ -554,6 +538,7 @@ span.msg {
     text-align: center;
 }
 #submit-btn, #confirm-btn {
+    -webkit-appearance: none;
     width: 300px;
     height: 70px;
     color: #fff;
@@ -694,7 +679,7 @@ html.modalset {
 }
 .shift-select, .shift-details {
     background: #fff;
-    padding: 80px 20px;
+    padding: 0;
     border-radius: 10px;
     display: inline-block;
     vertical-align: middle;
@@ -705,6 +690,7 @@ html.modalset {
 }
 .select-modal-box　.select-modal-close {
 }*/
+
 
 
 
@@ -777,4 +763,94 @@ html.modalset {
 }
 .edit-dropdown .edit-dropdown-menu li:active {
     background-color: #e2e2e2
+}
+
+
+
+@media(max-width: 767px){
+    header {
+        padding: 5px 0;
+    }
+    .form {
+        max-width: 300px;
+    }
+    #logo {
+        margin: 10px 0 0 15px;
+        width: 15%;
+        height: 15%;
+    }
+    .toggle-item {
+        background-color: #404f70;
+    }
+    .nav {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        display: none;
+        background-color: #404f70;
+    }
+    .toggle-item {
+        text-align: right;
+    }
+    #menu-toggle {
+        display: inline;
+        font-size: 30px;
+        line-height: 20px;
+        text-align: right;
+        color: #fff;
+        /*border-left: solid 2px rgb(99, 99, 99);*/
+        text-align: right;
+        padding: 50px 10px 10px 15px;
+        margin-right: 10px;
+    }
+    .nav_menu {
+        margin: 10px 0;
+        padding: 5px 0 0 0;
+        display: block;
+        border-top: solid 1px rgb(99, 99, 99);
+    }
+    .nav_menu a {
+        text-decoration: none;
+    }
+    p.login_now {
+        font-size: 10px;
+        display: block;
+    }
+    .shift_table td{
+        width: 25px;
+        font-size: 10px;
+        font-weight: 800;
+        /*padding: 5px 15px;*/
+    }
+    .user_shift {
+        font-size: 10px;
+    }
+    .user_rest {
+        min-height: 20px;
+    }
+    .select-modal-wrap, .determine-modal-wrap {
+        /*height: 0;*/
+        padding: 0;
+    }
+    .shift-select {
+        padding: 0;
+    }
+    .shift-details {
+        padding: 0 0 20px 0;
+    }
+}
+
+@media(max-width: 376px){
+    /*table td{
+        width: 20px;
+        font-size: 8px;
+        padding: 5px 10px 5px 10px;
+    }*/
+    .user_shift {
+        min-height: 20px;
+        font-size: 8px;
+    }
+    .user_rest {
+        min-height: 20px;
+    }
 }
