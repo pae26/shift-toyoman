@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get "pages/home_manager" => "pages#home_manager"
   get "pages/usage"=> "pages#usage"
   get "pages/inquiry" => "pages#inquiry"
+  post "pages/send_inquiry" => "pages#send_inquiry"
   get "pages/change_password" => "pages#change_password"
   post "pages/change_password" => "pages#changed_password"
   

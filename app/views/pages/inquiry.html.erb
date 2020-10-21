@@ -1,7 +1,8 @@
 <%= javascript_include_tag "home" %>
 
 <div id="inquiry">
-    <div class="headline_div">
+    <h1>現在開発中です。</h1>
+    <!--<div class="headline_div">
         <h2 class="headline">　ご意見・お問い合わせ　</h2>
         <p>
             ご要望や質問、感想などをどんどん送ってください！<br>
@@ -11,11 +12,15 @@
         </p>
     </div>
     <div class="text_form">
-        <form action="send.php" method="post">
+        <form action="/send_inquiry" method="post">
             <textarea name="content" cols="100" rows="10"></textarea>
             <div id="send_button">
                 <input type="submit" value="送信">
             </div>
         </form>
-    </div>
+        <%= form_with url: "/pages/send_inquiry" do |form| %>
+            <%= form.text_area :inquiry_message, size: "100x10" %>
+            <%= form.submit "送信する", class:"send-inquiry" %>
+        <% end %>
+    </div>-->
 </div>

@@ -225,6 +225,12 @@ class PagesController < ApplicationController
   def inquiry
   end
 
+  def send_inquiry
+    File.open("./app/views/pages/inquiry.txt", "a") do |f|
+      f.puts(params[:inquiry_message])
+    end
+  end
+
   def change_password
 
   end
