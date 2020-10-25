@@ -37,9 +37,9 @@
                         </div>
                         <% day_symbol = ("day" + day_count.to_s).to_sym %>
                         <% if @shift_next_month[day_symbol] == "×" || @shift_next_month[day_symbol] == "" #休み %>
-                            <div class="user_rest" id="shift_<%= day_count %>"><%= @shift_next_month[day_symbol] %></div>
+                            <div class="user_rest <%= @month_info[:weeks_english][i] %>" id="shift_<%= day_count %>"><%= @shift_next_month[day_symbol] %></div>
                         <% else #出勤 %>
-                            <div class="user_shift" id="shift_<%= day_count %>"><%= @shift_next_month[day_symbol] %></div>
+                            <div class="user_shift <%= @month_info[:weeks_english][i] %>" id="shift_<%= day_count %>"><%= @shift_next_month[day_symbol] %></div>
                         <% end %>
                         <% if i == 6 && day_count == @month_info[:next_end_month_day] %>
                             <% is_end = true %>
@@ -200,12 +200,31 @@
         <div class="submit-modal-bg"></div>
         <div class="submit-modal-box">
             <div class="inner">
+                <div class="close-item">
+                    <i class="fas fa-times close"></i>
+                </div>
                 <div class="modal-message">
                     シフトを提出しますか？<br>
-                    ※期限内であれば何度でも修正可能です
+                    <span class="notice">※期限内であれば何度でも修正可能です</span>
                 </div>
                 <div class="submit-modal-close"><button type="button" id="submit-cancel">キャンセル</button></div>
                 <div class="submit-modal-close"><button type="button" id="submit-ok">提出する</button></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="submitedModal" class="submited-modal">
+    <div class="submited-modal-wrap">
+        <div class="submited-modal-bg"></div>
+        <div class="submited-modal-box">
+            <div class="inner">
+                <div class="close-item">
+                    <i class="fas fa-times close"></i>
+                </div>
+                <div class="modal-message">
+                    シフトを提出しました！
+                </div>
             </div>
         </div>
     </div>

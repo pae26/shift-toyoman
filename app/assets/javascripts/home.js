@@ -34,11 +34,45 @@ $(function(){
     }
     limitCounter();
 
+    function manageShortage(day, before_time, after_time) {
+        if(before_time == "" || before_time == "×") {
+            if(!(after_time == "" || after_time == "×")) {
+                gon.shortage[day]['in_time'] += 1;
+                if(gon.shortage[day]['in_time'] >= gon.shortage[day]['border']) {
+                    $('#day' + day).removeClass('shortage');
+                }
+            }
+        }
+        else {
+            if(after_time == "" || after_time == "×") {
+                gon.shortage[day]['in_time'] -= 1;
+                if(gon.shortage[day]['in_time'] < gon.shortage[day]['border']) {
+                    $('#day' + day).addClass('shortage');
+                }
+            }
+            else {
+                gon.shortage[day]['in_time'] += 1;
+                if(gon.shortage[day]['in_time'] >= gon.shortage[day]['border']) {
+                    $('#day' + day).removeClass('shortage');
+                }
+            }
+        }
+    };
+
+    for(let shortage_day in gon.shortage) {
+        let border = gon.shortage[shortage_day]['border'];
+        let in_time = gon.shortage[shortage_day]['in_time'];
+        if(in_time < border) {
+            $('#day' + shortage_day).addClass("shortage");
+        }
+    }
+
     $('#logo').css('float', 'left');
 
     $('#menu-toggle').on('click', function(){
         $('.nav').slideToggle();
     });
+
 
     $('.selected-day').on('click',function(){
         let day_element = $(this).find("div");
@@ -105,7 +139,6 @@ $(function(){
         $('html').removeClass('modalset');
     });
 
-    /*Dropdown Menu*/
     $('.dropdown').on('click', function () {
         $(this).attr('tabindex', 1).focus();
         $(this).toggleClass('active');
@@ -125,27 +158,21 @@ $(function(){
     $('.shift-write').on('click', function(){
         let parents = $(this).parents();
         let day = parents[1].id.replace("select-day", "");
-        let time = $('.shift-time').html();
-        if(time == "希望時間を選択") {
+        let after_time = $('.shift-time').html();
+        if(after_time == "希望時間を選択") {
             return false;
         }
-        let obj_login_user = $('.login_now');
-        let login_user_name = obj_login_user[0].id;
-        //let login_user_name = $('.login_now').attr('id');
-        //if($('#day' + day)[0]) {
-        $('#login-element-time').html(time);
-        /*}
-        else {
-            $('#select-table-day' + day).append(
-                '<tr id="' + login_user_name + '_' + day +'">' +
-                    '<td class="element-name">' + login_user_name + '</td>' +
-                    '<td class="element-time">' + time + '</td>' +
-                '</tr>'
-            );
-        }*/
+        /*let obj_login_user = $('.login_now');
+        let login_user_name = obj_login_user[0].id;*/
 
-        $('#shift_' + day).html(time);
-        if(time == "×") {
+        /* 書き換え後の人手不足判定 */
+        let before_time = $('#shift_' + day).text();
+        manageShortage(day, before_time, after_time);
+
+        /* 書き換え */
+        $('#login-element-time').html(after_time);
+        $('#shift_' + day).html(after_time);
+        if(after_time == "×") {
             $('#shift_' + day).removeClass('user_shift');
             $('#shift_' + day).addClass('user_rest');
         }
@@ -153,23 +180,73 @@ $(function(){
             $('#shift_' + day).removeClass('user_rest');
             $('#shift_' + day).addClass('user_shift');
         }
+
+        $('.shift-time').html("希望時間を選択");
+        $('#selectModal').fadeOut(200);
+        $('html').removeClass('modalset');
+    });
+
+    $('.week-all-write').on('click', function(){
+        let week = $('.shift-week').html();
+        let after_time = $('.shift-week-time').html();
+        if(after_time == "希望時間を選択" || week == "曜日を選択") {
+            return false;
+        }
+        let weeks_to_english = {
+            '日曜日':'son',
+            '月曜日':'mon',
+            '火曜日':'tue',
+            '水曜日':'wed',
+            '木曜日':'thu',
+            '金曜日':'fri',
+            '土曜日':'sat',
+        };
+
+        let shortage_weeks = $('.' + weeks_to_english[week]).get();
+        for(let i = 0; i < shortage_weeks.length; i++) {
+            let day = (shortage_weeks[i].id).replace('shift_', "")
+            let before_time = shortage_weeks[i].innerText;
+            manageShortage(day, before_time, after_time);
+        }
+
+
+        $('.' + weeks_to_english[week]).html(after_time);
+        if(after_time == "×") {
+            $(weeks_to_english[week]).removeClass('user_shift');
+            $(weeks_to_english[week]).addClass('user_rest');
+        }
+        else {
+            $(weeks_to_english[week]).removeClass('user_rest');
+            $(weeks_to_english[week]).addClass('user_shift');
+        }
+        $('.shift-week').html("曜日を選択");
+        $('.shift-week-time').html("希望時間を選択");
+        $('#weekAllModal').fadeOut(200);
+        $('html').removeClass('modalset');
+
+        
+
     });
 
     $('.blank-all-write').on('click', function(){
-        let time = $('.shift-blank').html();
-        console.log(time);
-        if(time == "希望時間を選択") {
+        let after_time = $('.shift-blank').html();
+        if(after_time == "希望時間を選択") {
             return false;
         }
         for(let i=1;i<=gon.next_end_month_day;i++) {
+            
             if($('#shift_' + i).text() == "" ) {
-                $('#shift_' + i).html(time);
-                if(time != "×") {
+                let day = i;
+                let before_time = $('#shift_' + i).text();
+                $('#shift_' + i).html(after_time);
+                if(after_time != "×") {
                     $('#shift_' + i).removeClass('user_rest');
                     $('#shift_' + i).addClass('user_shift');
                 }
+                manageShortage(day, before_time, after_time);
             }
         }
+        $('.shift-blank').html('希望時間を選択');
         $('#blankAllModal').fadeOut(200);
         $('html').removeClass('modalset');
     });
@@ -178,8 +255,13 @@ $(function(){
         $('#submitModal').fadeIn(200);
         $('html').addClass('modalset');
     });
-    $('.submit-modal .submit-modal-bg,.submit-modal .submit-modal-close').on('click', function(){
+    $('.submit-modal .submit-modal-bg, .submit-modal .submit-modal-close, .close').on('click', function(){
         $('#submitModal').fadeOut(200);
+        $('html').removeClass('modalset');
+    });
+
+    $('.submited-modal .submited-modal-bg, .submited-modal .submited-modal-close, .close').on('click', function(){
+        $('#submitedModal').fadeOut(200);
         $('html').removeClass('modalset');
     });
 
@@ -204,8 +286,6 @@ $(function(){
     $('#submit-ok').on('click', function(){
         let submit_shift = {};
         let date = new Date();
-        console.log(gon.next_end_month_day);
-        //let next_month_end_day = new Date(date.getFullYear(), date.getMonth() + 2, 0).getDate();
         for(let i=1; i<=gon.next_end_month_day; i++) {
             submit_shift["day"+i] = $('#shift_' + i).text();
         }
@@ -218,8 +298,8 @@ $(function(){
             },
         }).done(function(data){
             console.log('通信成功！');
-            console.log(data);
-
+            $('#submitedModal').fadeIn(200);
+            $('html').addClass('modalset');
         }).fail(function(){
             alert('通信失敗');
         });
@@ -240,6 +320,9 @@ $(function(){
         }).done(function(data){
             $('.shift-details .details_one_day .element-detail').remove();
             for(let user_id in data.users_shift){
+                if(data.users_shift[user_id].shift == "" || data.users_shift[user_id].shift == "休") {
+                    continue;
+                }
                 $('.shift-details .details_one_day').append(
                     '<tr>' +
                         '<td class="element-detail">' + data.users_shift[user_id].name + '</td>' +

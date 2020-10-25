@@ -1,13 +1,7 @@
 <%= javascript_include_tag "home" %>
 
 <div class="manual">
-    <h2 class="manual_headline">初回ログイン</h2>
-    <p>
-        初めてログインした場合は、画面下部の「パスワード変更」から<span class="emphasize">必ずパスワードを変更してください</span>。
-    </p>
-    <!--<?php
-    if($_SESSION['id']==1){
-        echo '-->
+    <div class="manual-item">
         <h2 class="manual_headline">シフト編集</h2>
         <p>
             20日以降になると、アルバイトが提出したシフト表を編集することができるようになります。
@@ -24,47 +18,55 @@
             選択が終わったら「書き込む」ボタンを押してもらうと表の該当箇所が書き換えられます。<br>
             「確定」ボタンを押すとシフト表を確定して全従業員に公開します(前回のシフト表は見えなくなります)。<br>
         </p>
-
-        <!--';
-    }
-    else{
-        echo '-->
+    </div>
+    <div class="manual-item">
         <h2 class="manual_headline">シフト提出</h2>
-        <p>
-            「日付を選択」で入りたい日にちを選択して、「時間を選択」で時間を選択してください(○は17:00です)。
+        <h3 class="manual_sub_headline">　通常操作　</h3>
+        <p class="manual_paragraph">
+            ① シフトを入力したい日を選択します
+        </p>
+        <img src="/assets/usage_1.jpeg" class="usage_img">
+        <p class="manual_paragraph">
+            ② 希望する時間を選択します<br>
+            ③ <i class="fas fa-pen"></i> を押してシフト表に書き込みます
+        </p>
+        <img src="/assets/usage_2.jpeg" class="usage_img">
+
+        <h3 class="manual_sub_headline">　各種ボタン操作　</h3>
+        <img src="/assets/usage_btn_1" class="manual_btn_img">
+        <p class="manual_btn_paragraph">
+            ボタンを押すと「曜日」と「希望時間」を選択できます<br>
+            <i class="fas fa-pen"></i>を押して、指定した曜日全てに希望時間を書き込みます
+        </p>
+        <img src="/assets/usage_btn_2" class="manual_btn_img">
+        <p class="manual_btn_paragraph">
+            ボタンを押すと「指定時間」を選択できます<br>
+            <i class="fas fa-pen"></i>を押して、シフト表の空白になっている箇所に希望時間を書き込みます
+        </p>
+        <img src="/assets/usage_btn_3" class="manual_btn_img">
+        <p class="manual_btn_paragraph">
+            シフトの内容を店長および他の従業員に送信して共有します<br>
+            シフトを送信しても、期限内であれば何度でも再送信可能です
         </p>
         <p>
-            両方選択して「書き込む」ボタンを押すと、表の該当箇所が書き換えられます。<br>
-            「全て書き込む」ボタンを押すと、選択されている時間を全ての日にちに書き込みます。<br>
-            <span class="emphasize">多くシフトを入れる人は時間設定で○を、そうでない人は×を選択して「全て書き込む」ボタンを押した後、残りの日程を書き込んでいくのがスムーズです</span>。<br>
-            赤色の枠は誰もシフトに入っていないことを表しているので、表から赤色を消していくことを意識しましょう。
+            
         </p>
-        <p>
-            日程が決まったら「送信」ボタンを押してください(「送信」ボタンを押さないと、書き込んだ内容が反映されません)。<span class="emphasize">送信後も提出期限内であれば何度でも修正可能です</span>。
-        </p>
-        <p>
+        <p class="manual_paragraph">
             シフトの提出は原則毎月20日を期限としており、<span class="emphasize">期限を過ぎるとシフトの修正・送信ができなくなります</span>ので必ず期限内にシフトを提出してください。<br>
-            店長がシフトを確定すると全従業員に公開されます。
+            なお、各月の月初めに新しいシフトを提出できるようになります。
         </p>
-        <p>
-            各月の月初めに新しいシフトが提出できるようになります。
-        </p>';
-    }
-    <!--?>-->
-    <h2 class="manual_headline">ご意見</h2>
-    <p>
-        画面下部の「ご意見」ではアプリ作成者にメッセージを匿名で送ることができます。
-    </p>
-    <p>
-        ここがちょっと使いにくい、こんな機能があれば嬉しい、不具合を見つけた、といったことは<span class="emphasize">どんな些細なことでも教えていただけると大変助かります</span>。<br>
-        また、聞きたいことや使ってみた感想などもお気軽に送ってください。
-    </p>
-    <p>
-        いただいたご要望は製作者の技術の及ぶ範囲で適宜対応する方針です。<br>
-        質問や感想は今後返信を表示できるようなスペースを設けたいと考えています。<br>
-        (シフトが重なれば、直接言ってもらっても構いません)
-    </p>
-    <p>
-        より良いシステムを目指すために、ご協力をお願いします！
-    </p>
+    </div>
+    <div class="manual-item">
+        <h2 class="manual_headline">ご意見</h2>
+        <p class="manual_paragraph">
+            「ご意見」ページは現在開発中です
+        </p>
+        <p class="manual_paragraph">
+            使いにくいところや欲しい機能、質問などは、お手数ですが開発者に直接言ってもらうか店長に伝えていただけると助かります
+        </p>
+        <p class="manual_paragraph">
+            些細なことでも気になることを共有していただければ大変助かります<br>
+            より良いシステムにするためにご協力をお願いします！
+        </p>
+    </div>
 </div>

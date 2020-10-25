@@ -16,6 +16,7 @@ class PagesController < ApplicationController
 
     now = Time.new #今月Timeクラス
     weeks = ['日', '月', '火', '水', '木', '金', '土']
+    weeks_english = ['son', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat']
     this_year = now.year #今年
     this_month = now.month #今月
     today = now.day #今日
@@ -25,19 +26,21 @@ class PagesController < ApplicationController
     next_month = next_.month #翌月
     next_beginning_month_day = next_.beginning_of_month #翌月月初
     next_end_month_day = next_.end_of_month.day #翌月月末
-    if this_month == 1
-      prev_end_month_day = Time.new(this_year - 1, 12).end_of_month.day
+    prev_ = now.prev_month #前月
+    prev_end_month_day = prev_.end_of_month.day #前月月末
+    if this_month == 12
+      next_year = 1
     else
-      prev_end_month_day = Time.new(this_year, this_month - 1).end_of_month.day
+      next_year = this_year
     end
     
     #月替り時
     month_changed = false
+    shift_all_next_month = NextMonth.all.order(user_id: "ASC")
     File.open("./app/views/pages/month.txt", "r") do |f|
       f.each_line do |line|
         unless line.to_s.gsub(/\R/, "") == this_month.to_s
           month_changed = true
-          shift_all_next_month = NextMonth.all.order(user_id: "ASC")
 
           #ThisMonthの値をNextMonthに変えてNextMonthを白紙に
           shift_all_next_month.each do |user_next_month|
@@ -65,6 +68,7 @@ class PagesController < ApplicationController
     #日付情報インスタンス変数
     @month_info = {
       weeks: weeks,
+      weeks_english: weeks_english,
       this_year: this_year,
       this_month: this_month,
       today: today,
@@ -85,6 +89,37 @@ class PagesController < ApplicationController
     if @login_user.user_id == 1
       redirect_to action: :home_manager, month_info: @month_info, data: {"turbolinks" => false}
     end
+
+    #人手不足情報インスタンス変数
+    shortage = {}
+    user_count = shift_all_next_month.length
+    for i in 1..next_end_month_day do
+      week = Date.new(next_year, next_month, i).wday
+      if week == 0 || week == 6
+        shortage_border = 3
+      else
+        shortage_border = 2
+      end
+      count = 0
+      in_time = 0
+      day_sym = ("day" + i.to_s).to_sym
+      shift_one_day = shift_all_next_month.pluck(day_sym)
+      shift_one_day.each do |one_shift_time|
+        count += 1
+        one_shift_time = one_shift_time.gsub(/\R/, "")
+        if one_shift_time.match(/.*:.*/)
+          in_time += 1
+        end
+        #if in_time >= shortage_border
+        #  break
+        #end
+        if count == user_count
+          shortage[i.to_s.to_sym] = {'border': shortage_border, 'in_time': in_time}
+        end
+      end
+    end
+
+    gon.shortage = shortage
 
     @submit_or_confirmed = "提出"
 
@@ -154,7 +189,6 @@ class PagesController < ApplicationController
     else
       users = NextMonth.where("user_id >= ?", 5)
     end
-    users_id = users.select('user_id')
     users_shift = {}
     day_sym = params[:day].to_s.to_sym
     users.each do |user|
@@ -176,7 +210,6 @@ class PagesController < ApplicationController
 
   def determine_day
     users = ThisMonth.where.not("#{params[:day]} LIKE ?", "NULL")
-    users_id = users.select('user_id')
     users_shift = {}
     day_sym = params[:day].to_s.to_sym
     users.each do |user|

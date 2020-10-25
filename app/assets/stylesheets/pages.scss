@@ -78,8 +78,8 @@ table .employee, table .employee_name, table .confirmed_employee_name{
     background-color:#e1e1e1;
     z-index: 3;
 }
-.day,.week{
-    background-color: #8798bb !important;/*#a2afca;*/
+.day, .week {
+    background-color:#a2afca !important;
 }
 .sunday{
     color:red;
@@ -204,6 +204,11 @@ div.select_day_time,
     border-bottom: double 5px #627295;
     font-size: 30px;
 }
+.manual_sub_headline {
+    display: inline-block;
+    border-bottom: double 5px #627295;
+    font-size: 20px;
+}
 .headline_div{
     text-align: center;
 }
@@ -244,15 +249,20 @@ div.select_day_time,
 }
 .manual{
     margin: 0 10px;
+    text-align: center;
+}
+.manual-item {
+    margin-bottom: 100px;
 }
 .manual_headline{
     color: #000;
     display: block;
-    width: 200px;
-    margin:50px 10px;
+    /*width: 50px;*/
+    margin:30px 30px 10px;
     background-color: #fff;
-    padding: .25em 30px .5em .75em;
+    padding: 10px 20px;
     border-left: 6px solid #404f70;
+    border-right: 6px solid #404f70;
     border-bottom: 1px solid #ccc;
 }
 .emphasize{
@@ -341,7 +351,9 @@ div.select_day_time,
 .shift_table td.is-disabled {
     color: #ccc;
 }
-
+.shortage {
+    background-color: rgb(255, 162, 162) !important;
+}
 .shift-day {
     margin-bottom: 20px;
 }
@@ -452,13 +464,16 @@ span.msg {
 .blank-all-write {
     margin: 0;
 }
-.select-container,
-.week-all-container,
-.blank-all-container {
+.select-container {
   margin: 10px 20px 10px;
   text-align: center
 }
-.shift-time, .shift-week {
+.week-all-container,
+.blank-all-container {
+    margin: 10px 20px 10px;
+    text-align: center
+}
+.shift-time, .shift-week, .shift-week-time, .shift-blank {
     color: rgb(141, 141, 141);
 }
 
@@ -620,6 +635,7 @@ html.modalset {
     overflow: hidden;
 }
 .submit-modal,
+.submited-modal,
 .select-modal,
 .determine-modal,
 .confirm-modal,
@@ -634,6 +650,7 @@ html.modalset {
     z-index: 9999;
 }
 .submit-modal-wrap,
+.submited-modal-wrap,
 .select-modal-wrap,
 .determine-modal-wrap,
 .confirm-modal-wrap,
@@ -650,6 +667,7 @@ html.modalset {
     white-space: nowrap;
 }
 .submit-modal-wrap::-webkit-scrollbar,
+.submited-modal-wrap::-webkit-scrollbar,
 .select-modal-wrap::-webkit-scrollbar,
 .determine-modal-wrap::-webkit-scrollbar,
 .confirm-modal-wrap::-webkit-scrollbar,
@@ -658,6 +676,7 @@ html.modalset {
     display: none;
 }
 .submit-modal-wrap:after,
+.submited-modal-wrap:after,
 .confirm-modal-wrap:after {
     content: '';
     display: inline-block;
@@ -666,6 +685,7 @@ html.modalset {
     height: 100%;
 }
 .submit-modal-bg,
+.submited-modal-bg,
 .confirm-modal-bg {
     position: absolute;
     left: 0;
@@ -675,6 +695,7 @@ html.modalset {
     height: 100%;
 }
 .submit-modal-box,
+.submited-modal-box,
 .confirm-modal-box {
     width: 100%;
     max-width: 900px;
@@ -683,12 +704,14 @@ html.modalset {
     position: relative;
 }
 .submit-modal-box .inner,
+.submited-modal-box .inner,
 .confirm-modal-box .inner {
     background: #fff;
     padding: 80px 20px;
     border-radius: 10px;
 }
 .submit-modal-box .inner > :first-child,
+.submited-modal-box .inner > :first-child,
 .confirm-modal-box .inner > :first-child {
     margin-top: 0;
 }
@@ -873,6 +896,9 @@ html.modalset {
     .user_shift, .user_rest {
         font-size: 10px;
     }
+    .select-container {
+        margin: 10px 20px 200px;
+    }
     .select-modal-wrap, .determine-modal-wrap {
         /*height: 0;*/
         padding: 0;
@@ -882,6 +908,49 @@ html.modalset {
     }
     .shift-details {
         padding: 0 0 20px 0;
+    }
+    .notice {
+        font-size: 15px;
+    }
+    .submit-modal-box,
+    .submited-modal-box {
+        width: 80%;
+    }
+    .submit-modal-box .inner,
+    .submited-modal-box .inner {
+        padding: 15px 10px 20px;
+    }
+    .submit-modal-box .inner .modal-message,
+    .submited-modal-box .inner .modal-message {
+        font-size: 18px;
+    }
+    #submit-cancel, #submit-ok {
+        width: 100px;
+        margin: 30px 10px 0 10px;
+        padding: 5px;
+        font-size: 15px;
+    }
+    .usage_img_item {
+        text-align: center;
+    }
+    .usage_img {
+        width: 70%;
+        height: 80%;
+        margin-bottom: 50px;
+    }
+    .manual_btn_img {
+        width: 70%;
+        height: 80%;
+    }
+    .manual_paragraph {
+        max-width: 300px;
+        text-align: left;
+        margin: 10px auto 20px;
+    }
+    .manual_btn_paragraph {
+        max-width: 300px;
+        text-align: left;
+        margin: 10px auto 100px;
     }
 }
 
