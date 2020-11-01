@@ -1,52 +1,70 @@
 <%= javascript_include_tag "home" %>
 
 <div class="manual">
-    <div class="manual-item">
-        <h2 class="manual_headline">シフト編集</h2>
-        <p>
-            20日以降になると、アルバイトが提出したシフト表を編集することができるようになります。
-        </p>
-        <p>
-            「従業員を選択」でシフトを編集したい従業員を、「日付を選択」で日にちを、「時間を選択」で就業開始時間をそれぞれ選択できます。
-        </p>
-        <p>
-            「従業員を選択」で選べるのは正社員と、設定されている日付に就業可能なアルバイトです。<br>
-            正社員を選択した場合は日にち・時間を自由に指定できますが、アルバイトを選択した場合はそのアルバイトが出勤できる日にちと希望する時間しか選択できません。<br>
-            その日のアルバイトをシフトに入れない場合は「時間を選択」で×を選択してください。
-        </p>
-        <p>
-            選択が終わったら「書き込む」ボタンを押してもらうと表の該当箇所が書き換えられます。<br>
-            「確定」ボタンを押すとシフト表を確定して全従業員に公開します(前回のシフト表は見えなくなります)。<br>
-        </p>
-    </div>
+    <% if @login_user.user_id == 999 %>
+        <div class="manual-item">
+            <h2 class="manual_headline">ゲストの方へ</h2>
+            <p>
+                本アプリをご利用いただきありがとうございます。
+            </p>
+            <p class="manual_paragraph">
+                現在はアルバイト視点でログインしており、シフトの提出・確認を体験することができます。<br>
+                なお、実際にアルバイトに使用していただいてるページとゲストモードとの違いは以下の通りになります。
+            </p>
+            <br>
+            <br>
+            <p class="manual_paragraph">
+                ・ゲストモードのシフト表は架空のものです<br>
+                ・ゲストモードではパスワードの変更はできません<br>
+                ・ゲストモードでは20日を過ぎてもシフトの編集が可能です<br>
+                ・ゲストモードで「提出する」ボタンを押してもシフトやページ内の表示は更新されません<br>
+            </p>
+        </div>
+    <% end %>
     <div class="manual-item">
         <h2 class="manual_headline">シフト提出</h2>
-        <h3 class="manual_sub_headline">　通常操作　</h3>
-        <p class="manual_paragraph">
-            ① シフトを入力したい日を選択します
-        </p>
-        <img src="/assets/usage_1.jpeg" class="usage_img">
-        <p class="manual_paragraph">
-            ② 希望する時間を選択します<br>
-            ③ <i class="fas fa-pen"></i> を押してシフト表に書き込みます
-        </p>
-        <img src="/assets/usage_2.jpeg" class="usage_img">
+        <div class="manual_sub_headline_item">
+            <h3 class="manual_sub_headline">　通常操作　</h3>
+        </div>
+        <div class="manual-sub-item">
+            <p class="manual_paragraph_normal">
+                ① シフトを入力したい日を選択します。<br><br>
+            </p>
+            <img src="/assets/usage_1.jpeg" class="usage_img">
+        </div>
+        <div class="manual-sub-item">
+            <p class="manual_paragraph_normal">
+                ② 希望する時間を選択します。<br>
+                ③ <i class="fas fa-pen"></i> を押してシフト表に書き込みます。
+            </p>
+            <% if @login_user.user_id == 999 %>
+                <img src="/assets/guest_usage_2.jpeg" class="usage_img">
+            <% else %>
+                <img src="/assets/usage_2.jpeg" class="usage_img">
+            <% end %>
+        </div>
 
+        <p class="manual_paragraph">
+            ※シフト希望者が一定数(平日は2人、休日は3人)に満たない場合は日にちの枠が赤色で表示されます。<br>
+             赤い枠を優先的に減らしていきましょう。
+        </p>
+        
         <h3 class="manual_sub_headline">　各種ボタン操作　</h3>
+        <br>
         <img src="/assets/usage_btn_1" class="manual_btn_img">
         <p class="manual_btn_paragraph">
-            ボタンを押すと「曜日」と「希望時間」を選択できます<br>
-            <i class="fas fa-pen"></i>を押して、指定した曜日全てに希望時間を書き込みます
+            ボタンを押すと「曜日」と「希望時間」を選択できます。<br>
+            <i class="fas fa-pen"></i>を押して、指定した曜日全てに希望時間を書き込みます。
         </p>
         <img src="/assets/usage_btn_2" class="manual_btn_img">
         <p class="manual_btn_paragraph">
-            ボタンを押すと「指定時間」を選択できます<br>
-            <i class="fas fa-pen"></i>を押して、シフト表の空白になっている箇所に希望時間を書き込みます
+            ボタンを押すと「希望時間」を選択できます。<br>
+            <i class="fas fa-pen"></i>を押して、シフト表の空白になっている箇所に希望時間を書き込みます。
         </p>
         <img src="/assets/usage_btn_3" class="manual_btn_img">
         <p class="manual_btn_paragraph">
-            シフトの内容を店長および他の従業員に送信して共有します<br>
-            シフトを送信しても、期限内であれば何度でも再送信可能です
+            シフトの内容を店長および他の従業員に送信して共有します。<br>
+            シフトを送信しても、期限内であれば何度でも再送信可能です。
         </p>
         <p>
             
@@ -59,13 +77,13 @@
     <div class="manual-item">
         <h2 class="manual_headline">ご意見</h2>
         <p class="manual_paragraph">
-            「ご意見」ページは現在開発中です
+            「ご意見」ページは現在開発中です。
         </p>
         <p class="manual_paragraph">
-            使いにくいところや欲しい機能、質問などは、お手数ですが開発者に直接言ってもらうか店長に伝えていただけると助かります
+            使いにくいところや欲しい機能、質問などは、お手数ですが開発者に直接言ってもらうか店長に伝えてください。
         </p>
         <p class="manual_paragraph">
-            些細なことでも気になることを共有していただければ大変助かります<br>
+            些細なことでも気になることを共有していただければ大変助かります。<br>
             より良いシステムにするためにご協力をお願いします！
         </p>
     </div>

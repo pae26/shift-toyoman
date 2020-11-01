@@ -129,9 +129,6 @@ $(function(){
         }).fail(function(data){
             alert('通信失敗');
         })
-        //$('.shift-select').hide();
-        //$('#select-day' + day).show();
-        //$('#select-day' + day).attr("data-selectday", day + "日");
     });
     $('.select-modal .select-modal-bg,.select-modal .select-modal-close, .close').on('click', function(){
         $('.shift-time').html("希望時間を選択");
@@ -165,7 +162,7 @@ $(function(){
         /*let obj_login_user = $('.login_now');
         let login_user_name = obj_login_user[0].id;*/
 
-        /* 書き換え後の人手不足判定 */
+        /* 人手不足判定 */
         let before_time = $('#shift_' + day).text();
         manageShortage(day, before_time, after_time);
 
@@ -320,13 +317,13 @@ $(function(){
         }).done(function(data){
             $('.shift-details .details_one_day .element-detail').remove();
             for(let user_id in data.users_shift){
-                if(data.users_shift[user_id].shift == "" || data.users_shift[user_id].shift == "休") {
+                if(data.users_shift[user_id].shift == "" || data.users_shift[user_id].shift == "休" || data.users_shift[user_id].shift == "×") {
                     continue;
                 }
                 $('.shift-details .details_one_day').append(
-                    '<tr>' +
-                        '<td class="element-detail">' + data.users_shift[user_id].name + '</td>' +
-                        '<td class="element-detail">' + data.users_shift[user_id].shift + '</td>' +
+                    '<tr class="element-detail">' +
+                        '<td class="element-name">' + data.users_shift[user_id].name + '</td>' +
+                        '<td class="element-time">' + data.users_shift[user_id].shift + '</td>' +
                     '</tr>'
                 );
             }

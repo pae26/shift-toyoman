@@ -1,0 +1,2 @@
+class GuestThisMonth < ApplicationRecord
+end

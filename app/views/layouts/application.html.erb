@@ -31,7 +31,11 @@
                     <%= link_to("ホーム", "/pages/home") %>
                   </li>
                   <li class="nav_menu">
+                  <% if @login_user.user_id == 1 || @login_user.user_id == 9999 %>
+                    <%= link_to("使い方", "/pages/usage_manager") %>
+                  <% else %>
                     <%= link_to("使い方", "/pages/usage") %>
+                  <% end %>
                   </li>
                   <li class="nav_menu">
                     <%= link_to("ご意見",  "/pages/inquiry") %>
@@ -39,12 +43,6 @@
                   <li class="nav_menu">
                       <%= link_to("パスワード変更",  "/pages/change_password") %>
                   </li>
-                  <!--<?php 
-                  if($_SESSION['id']==1){
-                      echo '<div class="form_block">';
-                      echo '<a href="register.php" class="footer_menu">従業員編集</a>';
-                      echo '</div>';
-                  } ?>-->
                   <li class="nav_menu">
                       <%= link_to("ログアウト", "/auth/logout") %>
                   </li>

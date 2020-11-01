@@ -206,6 +206,10 @@
                 <div class="modal-message">
                     シフトを提出しますか？<br>
                     <span class="notice">※期限内であれば何度でも修正可能です</span>
+                    <% if @login_user.user_id == 999 %>
+                        <br>
+                        <span class="notice" style="color:red">※ゲストモードでは保存されません</span>
+                    <% end %>
                 </div>
                 <div class="submit-modal-close"><button type="button" id="submit-cancel">キャンセル</button></div>
                 <div class="submit-modal-close"><button type="button" id="submit-ok">提出する</button></div>
@@ -273,7 +277,7 @@
                             <%= day_count %>
                         </div>
                         <% day_symbol = ("day" + day_count.to_s).to_sym %>
-                        <% if @shift_this_month[day_symbol] == nil || @shift_this_month[day_symbol] == "×" #休み %>
+                        <% if @shift_this_month[day_symbol] == nil || @shift_this_month[day_symbol] == "×" || @shift_this_month[day_symbol] == "" #休み %>
                             <div class="user_rest" id="shift_<%= day_count %>"><%= "休" %></div>
                         <% else #出勤 %>
                             <div class="user_shift" id="shift_<%= day_count %>"><%= @shift_this_month[day_symbol] %></div>

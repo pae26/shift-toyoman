@@ -1,0 +1,49 @@
+<%= javascript_include_tag "home" %>
+
+<div class="manual">
+    <% if @login_user.user_id == 9999 %>
+    <div class="manual-item">
+        <h2 class="manual_headline">ゲストの方へ</h2>
+        <p>
+            本アプリをご利用いただきありがとうございます。
+        </p>
+        <p class="manual_paragraph">
+            現在は店長視点でログインしており、シフトの管理・編集を体験することができます。<br>
+            なお、実際に店長に使用していただいてるページとゲストモードとの違いは以下の通りになります。
+        </p>
+        <p class="manual_paragraph">
+            ・ゲストモードのシフト表は架空のものです
+            ・ゲストモードではパスワードの変更はできません<br>
+            ・ゲストモードで「公開する」ボタンを押してもシフトやページ内の表示は更新されません
+        </p>
+    </div>
+    <% end %>
+    <div class="manual-item">
+        <h2 class="manual_headline">シフト編集</h2>
+        <p>
+            シフト表の編集は20日〜月末の間で行うことができます。
+        </p>
+        <P class="manual_paragraph_normal">
+            ①編集する箇所を選択して時間を選択します。<br>
+            ②編集を終えたら「公開する」ボタンを押して従業員にシフトを公開します。
+        </P>
+        <% if @login_user.user_id == 999 %>
+            <img src="/assets/guest_usage_manager.png" class="usage_img">
+        <% else %>
+            <img src="/assets/usage_manager.png" class="usage_img">
+        <% end %>
+    </div>
+    <div class="manual-item">
+        <h2 class="manual_headline">ご意見</h2>
+        <p class="manual_paragraph">
+            「ご意見」ページは現在開発中です。
+        </p>
+        <p class="manual_paragraph">
+            使いにくいところや欲しい機能、質問などは、お手数ですが開発者に直接教えてください。
+        </p>
+        <p class="manual_paragraph">
+            些細なことでも気になることを共有していただければ大変助かります。<br>
+            より良いシステムにするためにご協力をお願いします！
+        </p>
+    </div>
+</div>

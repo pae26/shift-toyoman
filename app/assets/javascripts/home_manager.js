@@ -62,10 +62,16 @@ $(function(){
                 },
             }).done(function(data){
                 console.log('通信成功！');
-
+                $('#confirmedModal').fadeIn(200);
+                $('html').addClass('modalset');
             }).fail(function(){
                 alert('通信失敗...');
             });
         }
+    });
+
+    $('.confirmed-modal .confirmed-modal-bg, .confirmed-modal .confirmed-modal-close, .close').on('click', function(){
+        $('#confirmedModal').fadeOut(200);
+        $('html').removeClass('modalset');
     });
 });
