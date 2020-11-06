@@ -16,9 +16,8 @@ body{
 }
 header{
     width: 100%;
-    /*padding-bottom: 120px;*/
+    padding-bottom: 20px;
     margin: 0 auto;
-    /*text-align: center;*/
     background-color: #404f70;
     margin-top: 0;
 }
@@ -38,7 +37,6 @@ footer{
 }
 #title{
     margin-left: 10px;
-    /*padding-bottom: 20px;*/
     font-size: 30px;
     display: inline;
 }
@@ -47,34 +45,21 @@ footer{
     height: 8%;
     margin-left: 20px;
 }
-/*#app-title {
-    color: #fff;
-    font-weight: 700;
-    font-size: 20px;
-    mari
-}*/
 .nav {
     text-align: right;
     display: block;
-    margin: 80px 0 0 0;
-    padding-bottom: 20px;
+    margin: 50px 0 0;
 }
 .flash-logout, .flash-changed {
     text-align: center;
     font-weight: 500;
     background-color: rgb(139, 255, 139);
 }
-/*.check {
-    color: rgb(0, 255, 0);
-}*/
 .flash-error {
     text-align: center;
     font-weight: 500;
     background-color: rgb(255, 151, 151);
 }
-/*.cross {
-    color: rgb(255, 81, 81)
-}*/
 .form {
     max-width: 600px;
     margin: 50px auto;
