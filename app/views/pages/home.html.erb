@@ -31,7 +31,11 @@
                         <% is_end = true %>
                     <% end %>
                 <% else #翌月分 %>
-                    <td class="selected-day data-day=<%= day_count %>" id="day<%= day_count %>">
+                    <% if @month_info[:today] < 20 %>
+                        <td class="selected-day data-day=<%= day_count %>" id="day<%= day_count %>">
+                    <% else %>
+                        <td class="data-day=<%= day_count %>" id="day<%= day_count %>">
+                    <% end %>
                         <div class="shift-day">
                             <%= day_count %>
                         </div>
