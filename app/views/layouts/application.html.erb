@@ -16,9 +16,8 @@
       <div id="wrapper">
         <header>
             <img src="/assets/logo.png" id="logo">
-            <!--<span id="app-title">シフト共有・管理</span>-->
             
-            <% if @login_user %>
+            <% if session[:user_id] %>
               <br>
               <div class="toggle-item">
                 <div id="menu-toggle">
@@ -51,7 +50,7 @@
         </header>
 
         
-        <% if @login_user %>
+        <% if session[:user_id] %>
           <div class="login_now_item">
             <p class="login_now" id="<%= @login_user[:name] %>">ログイン中：<%= @login_user[:name] %>さん</p>
           </div>

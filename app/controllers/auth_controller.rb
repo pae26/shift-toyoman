@@ -1,6 +1,8 @@
 class AuthController < ApplicationController
   def login_form
-    
+    if session[:user_id]
+      session[:user_id] = nil
+    end
   end
 
   def login
@@ -15,7 +17,7 @@ class AuthController < ApplicationController
   end
 
   def logout
-    session[:user_id] =nil
+    session[:user_id] = nil
     flash[:logout] = "ログアウトしました"
     redirect_to action: :login_form
   end
