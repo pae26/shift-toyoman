@@ -21,13 +21,13 @@ $(function(){
                     clearInterval(timer);
                     $('#countOutput').text("提出期限が過ぎました");
                     if(login_user_id != 1){
-                        $('.submit, week-all, .blank-all, #limit_text').hide();
+                        $('.submit, .week-all, .blank-all, #limit_text').hide();
                     }
                 }
             }else{
                 if(login_user_id != 1){
                     $('#countOutput').text("提出期限が過ぎました");
-                    $('.submit, week-all, .blank-all, #limit_text').hide();
+                    $('.submit, .week-all, .blank-all, #limit_text').hide();
                 }
             }
         }, 1000);
