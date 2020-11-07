@@ -10,14 +10,6 @@ class PagesController < ApplicationController
   end
   
   def home
-    #シフト情報インスタンス変数
-    if @login_user.user_id == 999 || @login_user.user_id == 9999  #ゲスト
-      @shift_this_month = GuestThisMonth.find_by(user_id: @login_user.user_id)
-      @shift_next_month = GuestNextMonth.find_by(user_id: @login_user.user_id)
-    else  #従業員
-      @shift_this_month = ThisMonth.find_by(user_id: @login_user.user_id)
-      @shift_next_month = NextMonth.find_by(user_id: @login_user.user_id)
-    end
 
     now = Time.new #今月Timeクラス
     weeks = ['日', '月', '火', '水', '木', '金', '土']
@@ -73,6 +65,15 @@ class PagesController < ApplicationController
           f.puts("not")
         end
       end
+    end
+
+    #シフト情報インスタンス変数
+    if @login_user.user_id == 999 || @login_user.user_id == 9999  #ゲスト
+      @shift_this_month = GuestThisMonth.find_by(user_id: @login_user.user_id)
+      @shift_next_month = GuestNextMonth.find_by(user_id: @login_user.user_id)
+    else  #従業員
+      @shift_this_month = ThisMonth.find_by(user_id: @login_user.user_id)
+      @shift_next_month = NextMonth.find_by(user_id: @login_user.user_id)
     end
     
     #日付情報インスタンス変数
