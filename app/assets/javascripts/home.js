@@ -282,7 +282,6 @@ $(function(){
 
     $('#submit-ok').on('click', function(){
         let submit_shift = {};
-        let date = new Date();
         for(let i=1; i<=gon.next_end_month_day; i++) {
             submit_shift["day"+i] = $('#shift_' + i).text();
         }

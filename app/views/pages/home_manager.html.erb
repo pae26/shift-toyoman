@@ -50,7 +50,7 @@
                         <% day_sym = ("day#{i}").to_sym %>
                         
                         <td id="<%= user_name %>_<%= i %>">
-                            <% if @month_info[:today].to_i >= 20 %>
+                            <% if @month_info[:today].to_i >= 20 || @login_user.user_id == 9999 %>
                                 <div class="edit-dropdown">
                                     <div class="select">
                                         <span class="edit-shift-time"><%= shift_one_next_month[day_sym] %></span>
