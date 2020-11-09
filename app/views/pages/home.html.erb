@@ -31,7 +31,7 @@
                         <% is_end = true %>
                     <% end %>
                 <% else #翌月分 %>
-                    <% if @month_info[:today] < 20 %>
+                    <% if @month_info[:today] < 20 || @login_user.user_id == 999 %>
                         <td class="selected-day data-day=<%= day_count %>" id="day<%= day_count %>">
                     <% else %>
                         <td class="data-day=<%= day_count %>" id="day<%= day_count %>">

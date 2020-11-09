@@ -20,14 +20,16 @@ $(function(){
                 if ((h == 0) && (m == 0) && (s == 0)) {
                     clearInterval(timer);
                     $('#countOutput').text("提出期限が過ぎました");
-                    if(login_user_id != 1){
-                        $('.submit, .week-all, .blank-all, #limit_text').hide();
+                    $('#limit_text').hide();
+                    if(login_user_id != 1 && login_user_id != 999){
+                        $('.submit, .week-all, .blank-all').hide();
                     }
                 }
             }else{
-                if(login_user_id != 1){
-                    $('#countOutput').text("提出期限が過ぎました");
-                    $('.submit, .week-all, .blank-all, #limit_text').hide();
+                $('#countOutput').text("提出期限が過ぎました");
+                $('#limit_text').hide();
+                if(login_user_id != 1 && login_user_id != 999){
+                    $('.submit, .week-all, .blank-all').hide();
                 }
             }
         }, 1000);
