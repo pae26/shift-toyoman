@@ -7,14 +7,10 @@ $(function(){
 
     let date = new Date();
     let today = parseInt(date.getDate(), 10);
-    today = 25;
     let login_user_id = gon.login_user_id;
-    console.log(login_user_id);
-    console.log(today)
-    if(today < 20 || login_user_id != 9999) {
+    if(today < 20 && login_user_id != 9999) {
         $('#not_edit h2').show();
         $('.confirm').hide();
-        console.log("***");
     }
     else {
         $('#not_edit h2').hide();
