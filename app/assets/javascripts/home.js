@@ -22,14 +22,14 @@ $(function(){
                     $('#countOutput').text("提出期限が過ぎました");
                     $('#limit_text').hide();
                     if(login_user_id != 1 && login_user_id != 999){
-                        $('.submit, .week-all, .blank-all').hide();
+                        $('.submit, .week-all, .blank-all, .shift-write').hide();
                     }
                 }
             }else{
                 $('#countOutput').text("提出期限が過ぎました");
                 $('#limit_text').hide();
                 if(login_user_id != 1 && login_user_id != 999){
-                    $('.submit, .week-all, .blank-all').hide();
+                    $('.submit, .week-all, .blank-all, .shift-write, .dropdown').hide();
                 }
             }
         }, 1000);
