@@ -12,12 +12,11 @@
     next_end_month_day = @month_info[:next_end_month_day].to_i
     this_end_month_day = @month_info[:this_end_month_day].to_i
     weeks = @month_info[:weeks]
-    is_month_12 = next_month == 12
-    if is_month_12
-        year = 1
-    else
-        year = @month_info[:this_year].to_i
-    end
+    year = @month_info[:this_year].to_i
+    #is_month_12 = next_month == 12
+    #if is_month_12
+    #    year += 1
+    #end
 %>
 <div class="scroll">
     <div class="table-item">
