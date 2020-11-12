@@ -50,28 +50,28 @@
                         <% day_sym = ("day#{i}").to_sym %>
                         
                         <td id="<%= user_name %>_<%= i %>">
-                            <% if @month_info[:today].to_i >= 20 || @login_user.user_id == 9999 %>
-                                <div class="edit-dropdown">
-                                    <div class="select">
-                                        <span class="edit-shift-time"><%= shift_one_next_month[day_sym] %></span>
-                                    </div>
-                                    <input type="hidden" name="edit-select-time">
-                                    <ul class="edit-dropdown-menu">
-                                        <% if shift_one_next_month.user_id <= 4 || shift_one_next_month.user_id == 999 %>
-                                            <li value="×">×</li>
-                                            <li value="○">○</li>
-                                            <li value="△">△</li>
-                                        <% else %>
-                                            <li value="×">×</li>
-                                            <li value="16:30">16:30</li>
-                                            <li value="17:00">17:00</li>
-                                            <li value="17:30">17:30</li>
-                                            <li value="18:00">18:00</li>
-                                            <li value="18:30">18:30</li>
-                                        <% end %>
-                                    </ul>
+                            <div class="edit-dropdown">
+                                <div class="select">
+                                    <span class="edit-shift-time"><%= shift_one_next_month[day_sym] %></span>
                                 </div>
-                            <% end %>
+                                <% if @month_info[:today].to_i >= 20 || @login_user.user_id == 9999 %>
+                                <input type="hidden" name="edit-select-time">
+                                <ul class="edit-dropdown-menu">
+                                    <% if shift_one_next_month.user_id <= 4 || shift_one_next_month.user_id == 999 %>
+                                        <li value="×">×</li>
+                                        <li value="○">○</li>
+                                        <li value="△">△</li>
+                                    <% else %>
+                                        <li value="×">×</li>
+                                        <li value="16:30">16:30</li>
+                                        <li value="17:00">17:00</li>
+                                        <li value="17:30">17:30</li>
+                                        <li value="18:00">18:00</li>
+                                        <li value="18:30">18:30</li>
+                                    <% end %>
+                                </ul>
+                                <% end %>
+                            </div>
                         </td>
                         
                         <% end %>
