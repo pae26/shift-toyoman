@@ -19,17 +19,27 @@ $(function(){
 
                 if ((h == 0) && (m == 0) && (s == 0)) {
                     clearInterval(timer);
-                    $('#countOutput').text("提出期限が過ぎました");
+                    if(gon.confirmed) {
+                        $('#countOutput').text("シフトが確定しました！");
+                    }
+                    else {
+                        $('#countOutput').text("提出期限が過ぎました");
+                    }
                     $('#limit_text').hide();
                     if(login_user_id != 1 && login_user_id != 999){
-                        $('.submit, .week-all, .blank-all, .shift-write').hide();
+                        $('.submit, .week-all, .blank-all, .select-container').hide();
                     }
                 }
             }else{
-                $('#countOutput').text("提出期限が過ぎました");
+                if(gon.confirmed) {
+                    $('#countOutput').text("シフトが確定しました！");
+                }
+                else {
+                    $('#countOutput').text("提出期限が過ぎました");
+                }
                 $('#limit_text').hide();
                 if(login_user_id != 1 && login_user_id != 999){
-                    $('.submit, .week-all, .blank-all, .shift-write, .dropdown').hide();
+                    $('.submit, .week-all, .blank-all, .select-container').hide();
                 }
             }
         }, 1000);

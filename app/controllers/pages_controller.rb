@@ -128,6 +128,7 @@ class PagesController < ApplicationController
     end
 
     gon.shortage = shortage
+    gon.confirmed = false
 
     @submit_or_confirmed = "提出"
 
@@ -135,6 +136,7 @@ class PagesController < ApplicationController
       File.open("./app/views/pages/confirmed.txt", "r") do |f|
         f.each_line do |line|
           if line.to_s.gsub(/\R/, "") == "confirmed"
+            gon.confirmed = true
             @submit_or_confirmed = "表"
           end
         end
