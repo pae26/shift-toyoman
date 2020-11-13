@@ -26,7 +26,8 @@
         </p>
         <P class="manual_paragraph_normal">
             ①編集する箇所を選択して時間を選択します。<br>
-            ②編集を終えたら「公開する」ボタンを押して従業員にシフトを公開します。
+            ②編集を終えたら「公開する」ボタンを押して従業員にシフトを公開します。<br>
+            (公開後、×と空白は「休」に変換されます)
         </P>
         <% if @login_user.user_id == 999 %>
             <img src="/assets/guest_usage_manager.png" class="usage_img">
@@ -34,6 +35,7 @@
             <img src="/assets/usage_manager.png" class="usage_img">
         <% end %>
     </div>
+
     <div class="manual-item">
         <h2 class="manual_headline">ご意見</h2>
         <p class="manual_paragraph">
@@ -46,5 +48,21 @@
             些細なことでも気になることを共有していただければ大変助かります。<br>
             より良いシステムにするためにご協力をお願いします！
         </p>
+    </div>
+
+    <div class="manual-item">
+        <h2 class="manual_headline">今後の追加機能</h2>
+        <p class="manual_paragraph">
+            追加する予定の機能<br>
+            ・シフト編集の一時保存機能<br>
+            ・ホールと厨房の選択<br>
+            ・従業員の増減を管理するページ
+        </p>
+        <p class="manual_paragraph">
+            ご要望があれば追加を検討する機能<br>
+            ・人手不足のボーダーラインを設定できる機能<br>
+            ・シフト編集時、現在誰が何日間入っているかを表示
+        </p>
+
     </div>
 </div>
