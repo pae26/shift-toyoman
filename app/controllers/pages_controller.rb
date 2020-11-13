@@ -166,6 +166,25 @@ class PagesController < ApplicationController
       @user_id_name[user_id_sym] = user.name
     end
     @month_info = params[:month_info]
+
+    @edit_or_confirmed = "編集"
+    @edit_or_confirm = "公開"
+    @edit_or_confirm_modal = "シフトを確定して公開しますか？"
+    @reload_message = "ページを再読み込みすると確定したシフト表が表示されます"
+
+    if @login_user.user_id != 999
+      File.open("./app/views/pages/confirmed.txt", "r") do |f|
+        f.each_line do |line|
+          if line.to_s.gsub(/\R/, "") == "confirmed"
+            gon.confirmed = true
+            @edit_or_confirmed = "表"
+            @edit_or_confirm = "変更"
+            @edit_or_confirm_modal = "シフトを変更しますか？"
+            @reload_message = ""
+          end
+        end
+      end
+    end
   end
 
   def submit_shift
