@@ -82,16 +82,16 @@ $(function(){
     });
 
 
-    $('#export-table').tableExport({
+    $('#export-table-this').tableExport({
         formats: ["xlsx"],
         bootstrap: false
     });
 
-    let export_obj = $('caption button').clone();
-    $('#export-btn').append(export_obj);
-    $('#export-table caption').hide();
+    let export_obj_this = $('caption button').clone();
+    $('#export-btn-this').append(export_obj_this);
+    $('#export-table-this caption').hide();
 
-    $('#export-btn').on('click', function(){
-        $('#export-table caption button').trigger('click');
+    $('#export-btn-this').on('click', function(){
+        $('#export-table-this caption button').trigger('click');
     });
 });
