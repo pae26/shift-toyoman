@@ -1,6 +1,8 @@
 $(function(){
     $('#logo').css('float', 'left');
 
+    $('.scroll-confirmed').hide();
+
     $('#menu-toggle').on('click', function(){
         $('.nav').slideToggle();
     });
@@ -18,6 +20,10 @@ $(function(){
     }
 
     if(gon.confirmed) {
+        $('.scroll').hide();
+        $('.confirm').hide();
+        $('.scroll-confirmed').show();
+
         $('#export-table-next').tableExport({
             formats: ["xlsx"],
             bootstrap: false

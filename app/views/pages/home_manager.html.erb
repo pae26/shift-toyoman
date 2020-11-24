@@ -20,7 +20,7 @@
 %>
 <div class="scroll">
     <div class="table-item">
-        <table class="manage-shift" id="export-table-next" cellspacing="0">
+        <table class="manage-shift" cellspacing="0">
             <tr>
                 <th rowspan="2" id="month"><%= @month_info[:next_month] %>月</th>
                 <% for i in 1..next_end_month_day %>
@@ -92,8 +92,6 @@
     <button type="button" id="confirm-btn"><%= @edit_or_confirm %>する</button>
 </div>
 
-<div id="export-btn-next"></div>
-
 <div id="confirmModal" class="confirm-modal">
     <div class="confirm-modal-wrap">
         <div class="confirm-modal-bg"></div>
@@ -130,6 +128,48 @@
         </div>
     </div>
 </div>
+
+<div class="scroll-confirmed">
+    <table class="manage-shift" id="export-table-next" cellspacing="0">
+        <thead>
+        <tr>
+            <th rowspan="2" id="month"><%= @month_info[:next_month] %>月</th>
+            <% for i in 1..next_end_month_day %>
+                <td class="day"><%= i %></td>
+            <% end %>
+        </tr>
+        <tr>
+            <% for i in 1..next_end_month_day %>
+                <% week = Date.new(year, next_month, i) %>
+                <% if week.wday == 0 %>
+                    <td class="week sunday"><%= weeks[week.wday] %></td>
+                <% elsif week.wday == 6 %>
+                    <td class="week saturday"><%= weeks[week.wday] %></td>
+                <% else %>
+                    <td class="week"><%= weeks[week.wday] %></td>
+                <% end %>
+            <% end %>
+        </tr>
+        <tr>
+            <% @shift_all_next_month.each do |shift_one_next_month| %>
+                <%
+                user_id = shift_one_next_month.user_id
+                user_name = @user_id_name[user_id.to_s.to_sym]
+                %>
+                <tr>
+                    <th class="confirmed_employee_name" id=<%= user_id %>><%= user_name %>
+                    <% for i in 1..next_end_month_day %>
+                    <% day_sym = ("day#{i}").to_sym %>
+                        <td id="<%= user_id %>_<%= i %>"><%= (shift_one_next_month[day_sym] == nil || shift_one_next_month[day_sym] == "×" || shift_one_next_month[day_sym] == "") ? "休" : shift_one_next_month[day_sym] %></td>
+                    <% end %>
+                </tr>
+            <% end %>
+
+        </tr>
+    </table>
+</div>
+
+<div id="export-btn-next"></div>
 
 <div class="headline_div">
     <h2 class="headline">　<%= @month_info[:this_month] %>月シフト表　</h2>

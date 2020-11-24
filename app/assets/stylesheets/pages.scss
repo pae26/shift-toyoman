@@ -40,7 +40,7 @@ p.login_now{
     padding-bottom: 150px;
     box-shadow: 0 3px 10px #c1ced7;
 }
-.scroll, .scroll-determine{
+.scroll, .scroll-determine, .scroll-confirmed {
     overflow: auto;
     white-space: nowrap;
     width:auto;
@@ -48,7 +48,7 @@ p.login_now{
     margin-right: 30px;
     z-index: 1;
 }
-.scroll-determine {
+.scroll-determine, .scroll-confirmed {
     box-shadow: 0 3px 10px #c1ced7;
 }
 .table-item {
