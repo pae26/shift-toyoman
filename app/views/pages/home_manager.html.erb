@@ -134,7 +134,8 @@
 </div>
 
 <div class="scroll-determine">
-    <table class="manage-shift" cellspacing="0">
+    <table class="manage-shift" id="export-table" cellspacing="0">
+        <thead>
         <tr>
             <th rowspan="2" id="month"><%= @month_info[:this_month] %>月</th>
             <% for i in 1..this_end_month_day %>
@@ -152,6 +153,8 @@
                     <td class="week"><%= weeks[week.wday] %></td>
                 <% end %>
             <% end %>
+        </tr>
+        <tr>
             <% @shift_all_this_month.each do |shift_one_this_month| %>
                 <%
                 user_id = shift_one_this_month.user_id
@@ -168,4 +171,8 @@
 
         </tr>
     </table>
+</div>
+
+<div class="export-btn-item">
+    <div id="export-btn"></div>
 </div>

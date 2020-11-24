@@ -80,4 +80,14 @@ $(function(){
         $('#confirmedModal').fadeOut(200);
         $('html').removeClass('modalset');
     });
+
+
+    $('#export-table').tableExport({
+        formats: ["xlsx"],
+        bootstrap: false
+    });
+
+    let export_obj = $('caption button').clone();
+    $('#export-btn').append(export_obj);
+    $('#export-table caption').hide();
 });
