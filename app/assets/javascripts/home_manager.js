@@ -90,4 +90,8 @@ $(function(){
     let export_obj = $('caption button').clone();
     $('#export-btn').append(export_obj);
     $('#export-table caption').hide();
+
+    $('#export-btn').on('click', function(){
+        $('#export-table caption button').trigger('click');
+    });
 });
