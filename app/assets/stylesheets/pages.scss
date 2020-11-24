@@ -548,13 +548,14 @@ span.msg {
     text-align: center;
 }
 .confirm {
-    margin-bottom: 100px;
+    margin-bottom: 20px;
 }
 #submit-btn,
 #confirm-btn,
 #week-all-btn,
 #blank-all-btn,
-#export-btn-this button {
+#export-btn-this button,
+#export-btn-next button {
     -webkit-appearance: none;
     width: 300px;
     height: 70px;
@@ -571,7 +572,9 @@ span.msg {
 #submit-btn:active,
 #confirm-btn:active,
 #week-all-btn:active,
-#blank-all-btn:active {
+#blank-all-btn:active,
+#export-btn-this:active,
+#export-btn-next:active {
 	-webkit-transform: translate(0,2px);
 	-moz-transform: translate(0,2px);
 	transform: translate(0,2px);
@@ -877,9 +880,11 @@ html.modalset {
     background-color: #e2e2e2
 }
 
-#export-btn-this {
+#export-btn-this, #export-btn-next {
     text-align: center;
+    margin-bottom: 50px;
 }
+
 
 
 

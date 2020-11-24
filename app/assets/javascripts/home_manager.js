@@ -16,6 +16,19 @@ $(function(){
         $('#not_edit h2').hide();
         $('.confirm').show();
     }
+
+    if(gon.confirmed) {
+        $('#export-table-next').tableExport({
+            formats: ["xlsx"],
+            bootstrap: false
+        });
+
+        $('#export-btn-next').append('<button type="button">Excel出力</button>');
+        $('#export-table-next caption').hide();
+    }
+    $('#export-btn-next').on('click', function(){
+        $('#export-table-next caption button').trigger('click');
+    });
     
     $('.edit-dropdown').on('click', function () {
         $(this).attr('tabindex', 1).focus();
@@ -87,8 +100,7 @@ $(function(){
         bootstrap: false
     });
 
-    let export_obj_this = $('caption button').clone();
-    $('#export-btn-this').append(export_obj_this);
+    $('#export-btn-this').append('<button type="button">Excel出力</button>');
     $('#export-table-this caption').hide();
 
     $('#export-btn-this').on('click', function(){

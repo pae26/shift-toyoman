@@ -20,7 +20,7 @@
 %>
 <div class="scroll">
     <div class="table-item">
-        <table class="manage-shift" cellspacing="0">
+        <table class="manage-shift" id="export-table-next" cellspacing="0">
             <tr>
                 <th rowspan="2" id="month"><%= @month_info[:next_month] %>月</th>
                 <% for i in 1..next_end_month_day %>
@@ -91,6 +91,8 @@
 <div class="confirm">
     <button type="button" id="confirm-btn"><%= @edit_or_confirm %>する</button>
 </div>
+
+<div id="export-btn-next"></div>
 
 <div id="confirmModal" class="confirm-modal">
     <div class="confirm-modal-wrap">
