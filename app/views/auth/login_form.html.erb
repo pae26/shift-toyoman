@@ -1,12 +1,11 @@
 <div class="flash-logout">
-    <!--<i class="far fa-check-circle check"></i>-->
     <%= flash[:logout] %>
 </div>
 <div class="flash-error">
-    <!--<i class="far fa-times-circle cross"></i>-->
     <%= flash[:error] %>
 </div>
 
+<% if false %>
 <div class="form users-form">
     <div class="form-body">
         <% if @error_message %>
@@ -24,3 +23,12 @@
         <% end %>
     </div>
 </div>
+<% else %>
+<div class="maintenance-item">
+    <div class="maintenance-message">
+        ただいまメンテナンス中です。<br>
+        5分以内に終了する予定です。
+    </div>
+    <img src="/assets/maintenance.png" id="maintenance">
+</div>
+<% end %>

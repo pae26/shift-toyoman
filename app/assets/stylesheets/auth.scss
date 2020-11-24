@@ -116,10 +116,21 @@ footer{
     min-height: 30px;
     font-size: 15px;
 }
-/*.user_rest {
-    min-height: 30px;
-    margin-bottom: 3px;
-}*/
+
+.maintenance-item {
+    margin-top: 100px;
+    text-align: center;
+}
+.maintenance-message {
+    font-size: 20px;
+    font-weight: 800;
+    color: blue;
+    margin-bottom: 30px;
+}
+#maintenance {
+    width: 30%;
+    height: 50%;
+}
 
 
 
