@@ -1,7 +1,7 @@
 $(function(){
     $('#logo').css('float', 'left');
 
-    $('.scroll-confirmed').hide();
+    //$('.scroll-confirmed').hide();
 
     $('#menu-toggle').on('click', function(){
         $('.nav').slideToggle();
@@ -106,7 +106,6 @@ $(function(){
         bootstrap: false
     });
 
-    $('#export-btn-this').append('<button type="button">Excel出力</button>');
     $('#export-table-this caption').hide();
 
     $('#export-btn-this').on('click', function(){
