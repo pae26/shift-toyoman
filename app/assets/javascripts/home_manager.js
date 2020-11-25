@@ -19,18 +19,24 @@ $(function(){
         $('.confirm').show();
     }
 
-    if(gon.confirmed) {
-        $('.scroll').hide();
-        $('.confirm').hide();
+    if(gon.confirmed || login_user_id == 9999) {
+        //$('.scroll').hide();
+        //$('.confirm').hide();
         $('.scroll-confirmed').show();
+        $('#export-headline-next').show();
 
         $('#export-table-next').tableExport({
             formats: ["xlsx"],
             bootstrap: false
         });
 
-        $('#export-btn-next').append('<button type="button">Excel出力</button>');
         $('#export-table-next caption').hide();
+    }
+    else {
+        $('.scroll-confirmed').hide();
+        $('#export-table-next').hide();
+        $('#export-btn-next').hide();
+        $('#export-headline-next').hide();
     }
     $('#export-btn-next').on('click', function(){
         $('#export-table-next caption button').trigger('click');

@@ -180,7 +180,7 @@ class PagesController < ApplicationController
             @edit_or_confirmed = "表"
             @edit_or_confirm = "変更"
             @edit_or_confirm_modal = "シフトを変更しますか？"
-            @reload_message = ""
+            @reload_message = "ページを再読み込みすると変更されたシフト表が表示されます"
           end
         end
       end

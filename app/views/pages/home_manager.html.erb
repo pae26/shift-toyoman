@@ -1,7 +1,7 @@
 <%= javascript_include_tag "home_manager" %>
 
 <div class="headline_div">
-    <h2 class="headline">　<%= @month_info[:next_month] %>月シフト<%= @edit_or_confirmed %>　</h2>
+    <h2 class="headline">　<%= @month_info[:next_month] %>月シフト編集　</h2>
 </div>
 
 <div id="not_edit" style="text-align: center;"><h2>20日以降に編集可能です</h2></div>
@@ -127,6 +127,10 @@
             </div>
         </div>
     </div>
+</div>
+
+<div class="headline_div">
+    <h2 class="headline" id="export-headline-next">　<%= @month_info[:next_month] %>月シフト表　</h2>
 </div>
 
 <div class="scroll-confirmed">
