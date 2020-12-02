@@ -19,7 +19,7 @@ $(function(){
         $('.confirm').show();
     }
 
-    if(gon.confirmed || login_user_id == 9999) {
+    if(gon.confirmed && login_user_id == 1) {
         //$('.scroll').hide();
         //$('.confirm').hide();
         $('.scroll-confirmed').show();
