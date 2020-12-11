@@ -10,16 +10,15 @@ Rails.application.routes.draw do
   get "pages/change_password" => "pages#change_password"
   post "pages/change_password" => "pages#changed_password"
   
-  
   get "auth/login" => "auth#login_form"
   post "auth/login" => "auth#login"
   get "auth/logout" => "auth#logout"
 
-  post "/ajax" => "pages#ajax"
   post "/select_day" => "pages#select_day"
   post "/submit_shift" => "pages#submit_shift"
   post "/determine_day" => "pages#determine_day"
   post "/confirm_shift" => "pages#confirm_shift"
+  post "/save_shift" => "pages#save_shift"
   
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

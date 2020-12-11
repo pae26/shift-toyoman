@@ -13,10 +13,12 @@ $(function(){
     if(today < 20 && login_user_id != 9999) {
         $('#not_edit h2').show();
         $('.confirm').hide();
+        $('.save').hide();
     }
     else {
         $('#not_edit h2').hide();
         $('.confirm').show();
+        $('.save').show();
     }
 
     if(gon.confirmed && login_user_id == 1) {
@@ -31,6 +33,7 @@ $(function(){
         });
 
         $('#export-table-next caption').hide();
+        $('.save').hide();
     }
     else {
         $('.scroll-confirmed').hide();
@@ -106,6 +109,56 @@ $(function(){
         $('html').removeClass('modalset');
     });
 
+
+    $('#save-btn').on('click', function(){
+        $('#saveModal').fadeIn(200);
+        $('html').addClass('modalset');
+    });
+    $('.save-modal .save-modal-bg, .save-modal .save-modal-close').on('click', function(){
+        $('#saveModal').fadeOut(200);
+        $('html').removeClass('modalset');
+    });
+
+    $('#save-ok').on('click', function(){
+        let save_shift = {};
+        let get_name = $('.employee_name').text().replace(/(\r|\n)/g, '');
+        let employee_name = get_name.split(/\s+/g);
+        //空文字を除去
+        employee_name.pop();
+        console.log(employee_name);
+        //let next_month_end_day = new Date(date.getFullYear(), date.getMonth() + 2, 0).getDate();
+        for(let i=0; i<gon.employee_count; i++) {
+            save_shift["name"] = employee_name[i];
+            save_shift["shift"] = {};
+            for(let j=1; j<=gon.next_end_month_day; j++) {
+                shift_one = $('#' + employee_name[i] + '_' + j +' > .edit-dropdown > .select > .edit-shift-time').text();
+                /*if(shift_one == "" || shift_one == "×") {
+                    shift_one = "休"
+                }*/
+				save_shift["shift"]["day"+j] = shift_one;
+            }
+
+            $.ajax({
+                dataType: 'json',
+                type: 'POST',
+                url: '/save_shift',
+                data: {
+                    save_shift: save_shift,
+                },
+            }).done(function(data){
+                console.log('通信成功！');
+                $('#savedModal').fadeIn(200);
+                $('html').addClass('modalset');
+            }).fail(function(){
+                alert('通信失敗...');
+            });
+        }
+    });
+
+    $('.saved-modal .saved-modal-bg, .saved-modal .saved-modal-close, .close').on('click', function(){
+        $('#savedModal').fadeOut(200);
+        $('html').removeClass('modalset');
+    });
 
     $('#export-table-this').tableExport({
         formats: ["xlsx"],

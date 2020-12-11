@@ -88,6 +88,45 @@
     </div>
 </div>
 
+<div class="save">
+    <button type="button" id="save-btn">一時保存する</button>
+</div>
+
+<div id="saveModal" class="save-modal">
+    <div class="save-modal-wrap">
+        <div class="save-modal-bg"></div>
+        <div class="save-modal-box">
+            <div class="inner">
+                <div class="modal-message">
+                    一時保存しますか？<br>
+                    <% if @login_user.user_id == 9999 %>
+                        <br>
+                        <span class="notice" style="color:red">※ゲストモードでは保存されません</span>
+                    <% end %>
+                </div>
+                <div class="save-modal-close"><button type="button" id="save-cancel">キャンセル</button></div>
+                <div class="save-modal-close"><button type="button" id="save-ok">保存する</button></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="savedModal" class="saved-modal">
+    <div class="saved-modal-wrap">
+        <div class="saved-modal-bg"></div>
+        <div class="saved-modal-box">
+            <div class="inner">
+                <div class="close-item">
+                    <i class="fas fa-times close"></i>
+                </div>
+                <div class="modal-message">
+                    シフトを保存しました！<br>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="confirm">
     <button type="button" id="confirm-btn"><%= @edit_or_confirm %>する</button>
 </div>

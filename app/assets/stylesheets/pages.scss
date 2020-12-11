@@ -103,7 +103,7 @@ td[class^="login"],td[class^="prev_login"]{
 td[class*="login"].nobody{
     background-color:#ffce9e;
 }
-#submit, #confirm{
+#submit, #confirm, #save{
     font-size: large;
     text-align: center;
     display: inline-block;
@@ -114,7 +114,7 @@ td[class*="login"].nobody{
     border-bottom: solid 4px #627295;
     border-radius: 3px;
 }
-#submit:active, #confirm:active{
+#submit:active, #confirm:active, #save:active{
     -webkit-transform: translateY(4px);
     transform: translateY(4px);
     border-bottom: none;
@@ -543,15 +543,17 @@ span.msg {
 
 .submit,
 .confirm,
+.save,
 .week-all,
 .blank-all {
     text-align: center;
 }
-.confirm {
+.save {
     margin-bottom: 20px;
 }
 #submit-btn,
 #confirm-btn,
+#save-btn,
 #week-all-btn,
 #blank-all-btn,
 #export-btn-this button,
@@ -571,6 +573,7 @@ span.msg {
 }
 #submit-btn:active,
 #confirm-btn:active,
+#save-btn:active,
 #week-all-btn:active,
 #blank-all-btn:active,
 #export-btn-this:active,
@@ -586,7 +589,8 @@ span.msg {
     margin: 10px 0;
 }
 #submit-ok, #submit-cancel,
-#confirm-ok, #confirm-cancel {
+#confirm-ok, #confirm-cancel,
+#save-ok, #save-cancel {
     width: 200px;
     height: 50px;
     margin: 10px 20px;
@@ -596,16 +600,16 @@ span.msg {
     border-radius: 10px;
     color: #fff;
 }
-#submit-ok, #confirm-ok {
+#submit-ok, #confirm-ok, #save-ok {
     background-color: #005FFF;
 }
-#submit-cancel, #confirm-cancel {
+#submit-cancel, #confirm-cancel, #save-cancel {
     background-color: #FF0000;
 }
 .notice {
     font-size: 20px;
 }
-.submit-modal-close, .confirm-modal-close {
+.submit-modal-close, .confirm-modal-close, .save-modal-close {
     display: inline-block;
 }
 #week-all-btn,
@@ -628,6 +632,8 @@ html.modalset {
 .determine-modal,
 .confirm-modal,
 .confirmed-modal,
+.save-modal,
+.saved-modal,
 .week-all-modal,
 .blank-all-modal {
     display: none;
@@ -644,6 +650,8 @@ html.modalset {
 .determine-modal-wrap,
 .confirm-modal-wrap,
 .confirmed-modal-wrap,
+.save-modal-wrap,
+.saved-modal-wrap,
 .week-all-modal-wrap,
 .blank-all-modal-wrap  {
     width: 100%;
@@ -662,6 +670,8 @@ html.modalset {
 .determine-modal-wrap::-webkit-scrollbar,
 .confirm-modal-wrap::-webkit-scrollbar,
 .confirmed-modal-wrap::-webkit-scrollbar,
+.save-modal-wrap::-webkit-scrollbar,
+.saved-modal-wrap::-webkit-scrollbar,
 .week-all-modal-wrap::-webkit-scrollbar,
 .blank-all-modal-wrap::-webkit-scrollbar  {
     display: none;
@@ -669,7 +679,9 @@ html.modalset {
 .submit-modal-wrap:after,
 .submited-modal-wrap:after,
 .confirm-modal-wrap:after,
-.confirmed-modal-wrap:after {
+.confirmed-modal-wrap:after,
+.save-modal-wrap:after,
+.saved-modal-wrap:after {
     content: '';
     display: inline-block;
     vertical-align: middle;
@@ -679,7 +691,9 @@ html.modalset {
 .submit-modal-bg,
 .submited-modal-bg,
 .confirm-modal-bg,
-.confirmed-modal-bg {
+.confirmed-modal-bg,
+.save-modal-bg,
+.saved-modal-bg {
     position: absolute;
     left: 0;
     top: 0;
@@ -690,7 +704,9 @@ html.modalset {
 .submit-modal-box,
 .submited-modal-box,
 .confirm-modal-box,
-.confirmed-modal-box {
+.confirmed-modal-box,
+.save-modal-box,
+.saved-modal-box {
     width: 100%;
     max-width: 900px;
     display: inline-block;
@@ -700,7 +716,9 @@ html.modalset {
 .submit-modal-box .inner,
 .submited-modal-box .inner,
 .confirm-modal-box .inner,
-.confirmed-modal-box .inner {
+.confirmed-modal-box .inner,
+.save-modal-box .inner,
+.saved-modal-box .inner {
     background: #fff;
     padding: 80px 20px;
     border-radius: 10px;
@@ -708,12 +726,11 @@ html.modalset {
 .submit-modal-box .inner > :first-child,
 .submited-modal-box .inner > :first-child,
 .confirm-modal-box .inner > :first-child,
-.confirmed-modal-box .inner > :first-child {
+.confirmed-modal-box .inner > :first-child,
+.save-modal-box .inner > :first-child,
+.saved-modal-box .inner > :first-child {
     margin-top: 0;
 }
-/*.submit-modal-box　.submit-modal-close,
-.confirm-modal-box　.confirm-modal-close {
-}*/
 
 
 .select-modal-wrap:after,

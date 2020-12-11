@@ -150,7 +150,22 @@ class PagesController < ApplicationController
       @shift_all_this_month = GuestThisMonth.all.order(id: "ASC")
       users = GuestUser.all.order(id: "ASC")
     else
-      @shift_all_next_month = NextMonth.all.order(user_id: "ASC")
+      saved = false
+
+      File.open("./app/views/pages/saved.txt", "r") do |f|
+        f.each_line do |line|
+          if line.to_s.gsub(/\R/, "") == "saved"
+            saved = true
+          end
+        end
+      end
+      #編集が保存されていた場合
+      if saved
+        @shift_all_next_month = SavedNextMonth.all.order(user_id: "ASC")
+      else
+        @shift_all_next_month = NextMonth.all.order(user_id: "ASC")
+      end
+      
       @shift_all_this_month = ThisMonth.all.order(user_id: "ASC")
       users = User.all.order(user_id: "ASC")
     end
@@ -284,6 +299,10 @@ class PagesController < ApplicationController
       File.open("./app/views/pages/confirmed.txt", "w") do |f|
         f.puts("confirmed")
       end
+
+      File.open("./app/views/pages/saved.txt", "w") do |f|
+        f.puts("not")
+      end
   
       employee = User.find_by(name: params[:confirm_shift]["name"])
       employee_id = employee.user_id.to_i
@@ -292,6 +311,31 @@ class PagesController < ApplicationController
       params[:confirm_shift]["shift"].each do |day, shift_time|
         confirm_user[day.to_sym] = shift_time
         confirm_user.save
+      end
+    end
+
+    respond_to do |format|
+      format.html 
+      format.json {render action: :home, json: {
+          result: "OK",
+        }
+      }
+    end
+  end
+
+  def save_shift
+    if @login_user.user_id != 9999
+      File.open("./app/views/pages/saved.txt", "w") do |f|
+        f.puts("saved")
+      end
+  
+      employee = User.find_by(name: params[:save_shift]["name"])
+      employee_id = employee.user_id.to_i
+      save_user = SavedNextMonth.find_by(user_id: employee_id)
+      
+      params[:save_shift]["shift"].each do |day, shift_time|
+        save_user[day.to_sym] = shift_time
+        save_user.save
       end
     end
 
