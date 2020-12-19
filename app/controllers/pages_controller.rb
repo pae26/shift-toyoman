@@ -26,11 +26,29 @@ class PagesController < ApplicationController
     prev_ = now.prev_month #前月
     prev_end_month_day = prev_.end_of_month.day #前月月末
     if this_month == 12
-      next_year = 1
+      next_year = this_year + 1
     else
       next_year = this_year
     end
     
+    saved = false
+    File.open("./app/views/pages/saved.txt", "r") do |f|
+      f.each_line do |line|
+        if line.to_s.gsub(/\R/, "") == "saved"
+          saved = true
+        end
+      end
+    end
+
+    confirmed = false
+    File.open("./app/views/pages/confirmed.txt", "r") do |f|
+      f.each_line do |line|
+        if line.to_s.gsub(/\R/, "") == "confirmed"
+          confirmed = true
+        end
+      end
+    end
+
     #月替り時
     month_changed = false
     if @login_user.user_id == 999 || @login_user.user_id == 9999  #ゲスト
@@ -64,6 +82,26 @@ class PagesController < ApplicationController
         File.open("./app/views/pages/confirmed.txt", "w") do |f|
           f.puts("not")
         end
+        File.open("./app/views/pages/saved.txt", "w") do |f|
+          f.puts("not")
+        end
+      end
+    end
+
+    if (today >= 20 && today <= 31 ) && !(@login_user.user_id == 999 || @login_user.user_id == 9999)
+      #20日以降かつ編集が保存されていない場合
+      if !saved 
+        File.open("./app/views/pages/saved.txt", "w") do |f|
+          f.puts("saved")
+        end
+        shift_all_next_month.each do |user_next_month|
+          user_saved_month = SavedNextMonth.find_by(user_id: user_next_month.user_id)
+          for day in 1..31
+            day_sym = ("day" + day.to_s).to_sym
+            user_saved_month[day_sym] = user_next_month[day_sym]
+          end
+          user_saved_month.save
+        end
       end
     end
 
@@ -73,7 +111,14 @@ class PagesController < ApplicationController
       @shift_next_month = GuestNextMonth.find_by(user_id: @login_user.user_id)
     else  #従業員
       @shift_this_month = ThisMonth.find_by(user_id: @login_user.user_id)
-      @shift_next_month = NextMonth.find_by(user_id: @login_user.user_id)
+      if confirmed
+        @shift_next_month = NextMonth.find_by(user_id: @login_user.user_id)
+      elsif saved
+        @shift_next_month = SavedNextMonth.find_by(user_id: @login_user.user_id)
+      else
+        @shift_next_month = NextMonth.find_by(user_id: @login_user.user_id)
+      end
+      
     end
     
     #日付情報インスタンス変数
@@ -82,6 +127,7 @@ class PagesController < ApplicationController
       weeks_english: weeks_english,
       this_year: this_year,
       this_month: this_month,
+      next_year: next_year,
       today: today,
       this_beginning_month_day: this_beginning_month_day,
       this_end_month_day: this_end_month_day,
@@ -150,22 +196,7 @@ class PagesController < ApplicationController
       @shift_all_this_month = GuestThisMonth.all.order(id: "ASC")
       users = GuestUser.all.order(id: "ASC")
     else
-      saved = false
-
-      File.open("./app/views/pages/saved.txt", "r") do |f|
-        f.each_line do |line|
-          if line.to_s.gsub(/\R/, "") == "saved"
-            saved = true
-          end
-        end
-      end
-      #編集が保存されていた場合
-      if saved
-        @shift_all_next_month = SavedNextMonth.all.order(user_id: "ASC")
-      else
-        @shift_all_next_month = NextMonth.all.order(user_id: "ASC")
-      end
-      
+      @shift_all_next_month = NextMonth.all.order(user_id: "ASC")
       @shift_all_this_month = ThisMonth.all.order(user_id: "ASC")
       users = User.all.order(user_id: "ASC")
     end
@@ -230,11 +261,23 @@ class PagesController < ApplicationController
         end
       end
     end
+
+    saved = false
+    File.open("./app/views/pages/saved.txt", "r") do |f|
+      f.each_line do |line|
+        if line.to_s.gsub(/\R/, "") == "saved"
+          saved = true
+        end
+      end
+    end
+
     if @login_user.user_id == 999
       users = GuestNextMonth.where("user_id >= ? or user_id = ?", 5, 1).order(id: "ASC")
     else
       if confirmed
         users = NextMonth.all
+      elsif saved
+        users = SavedNextMonth.where("user_id >= ?", 5).order(user_id: "ASC")
       else
         users = NextMonth.where("user_id >= ?", 5).order(user_id: "ASC")
       end
@@ -299,10 +342,6 @@ class PagesController < ApplicationController
       File.open("./app/views/pages/confirmed.txt", "w") do |f|
         f.puts("confirmed")
       end
-
-      File.open("./app/views/pages/saved.txt", "w") do |f|
-        f.puts("not")
-      end
   
       employee = User.find_by(name: params[:confirm_shift]["name"])
       employee_id = employee.user_id.to_i
@@ -323,17 +362,17 @@ class PagesController < ApplicationController
     end
   end
 
-  def save_shift
+  def save_next_shift
     if @login_user.user_id != 9999
       File.open("./app/views/pages/saved.txt", "w") do |f|
         f.puts("saved")
       end
   
-      employee = User.find_by(name: params[:save_shift]["name"])
+      employee = User.find_by(name: params[:save_next_shift]["name"])
       employee_id = employee.user_id.to_i
-      save_user = SavedNextMonth.find_by(user_id: employee_id)
+      save_user = NextMonth.find_by(user_id: employee_id)
       
-      params[:save_shift]["shift"].each do |day, shift_time|
+      params[:save_next_shift]["shift"].each do |day, shift_time|
         save_user[day.to_sym] = shift_time
         save_user.save
       end

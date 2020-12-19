@@ -120,30 +120,29 @@ $(function(){
     });
 
     $('#save-ok').on('click', function(){
-        let save_shift = {};
+        let save_next_shift = {};
         let get_name = $('.employee_name').text().replace(/(\r|\n)/g, '');
         let employee_name = get_name.split(/\s+/g);
         //空文字を除去
         employee_name.pop();
-        console.log(employee_name);
         //let next_month_end_day = new Date(date.getFullYear(), date.getMonth() + 2, 0).getDate();
         for(let i=0; i<gon.employee_count; i++) {
-            save_shift["name"] = employee_name[i];
-            save_shift["shift"] = {};
+            save_next_shift["name"] = employee_name[i];
+            save_next_shift["shift"] = {};
             for(let j=1; j<=gon.next_end_month_day; j++) {
                 shift_one = $('#' + employee_name[i] + '_' + j +' > .edit-dropdown > .select > .edit-shift-time').text();
                 /*if(shift_one == "" || shift_one == "×") {
                     shift_one = "休"
                 }*/
-				save_shift["shift"]["day"+j] = shift_one;
+				save_next_shift["shift"]["day"+j] = shift_one;
             }
 
             $.ajax({
                 dataType: 'json',
                 type: 'POST',
-                url: '/save_shift',
+                url: '/save_next_shift',
                 data: {
-                    save_shift: save_shift,
+                    save_next_shift: save_next_shift,
                 },
             }).done(function(data){
                 console.log('通信成功！');

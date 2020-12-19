@@ -12,7 +12,8 @@
     next_end_month_day = @month_info[:next_end_month_day].to_i
     this_end_month_day = @month_info[:this_end_month_day].to_i
     weeks = @month_info[:weeks]
-    year = @month_info[:this_year].to_i
+    this_year = @month_info[:this_year].to_i
+    next_year = @month_info[:next_year].to_i
     #is_month_12 = next_month == 12
     #if is_month_12
     #    year += 1
@@ -29,7 +30,7 @@
             </tr>
             <tr>
                 <% for i in 1..next_end_month_day %>
-                    <% week = Date.new(year, next_month, i) %>
+                    <% week = Date.new(next_year, next_month, i) %>
                     <% if week.wday == 0 %>
                         <td class="week sunday"><%= weeks[week.wday] %></td>
                     <% elsif week.wday == 6 %>
@@ -183,7 +184,7 @@
         </tr>
         <tr>
             <% for i in 1..next_end_month_day %>
-                <% week = Date.new(year, next_month, i) %>
+                <% week = Date.new(next_year, next_month, i) %>
                 <% if week.wday == 0 %>
                     <td class="week sunday"><%= weeks[week.wday] %></td>
                 <% elsif week.wday == 6 %>
@@ -231,7 +232,7 @@
         </tr>
         <tr>
             <% for i in 1..this_end_month_day %>
-                <% week = Date.new(year, this_month, i) %>
+                <% week = Date.new(this_year, this_month, i) %>
                 <% if week.wday == 0 %>
                     <td class="week sunday"><%= weeks[week.wday] %></td>
                 <% elsif week.wday == 6 %>
