@@ -100,9 +100,6 @@ $(function(){
             $('.shift-select .select_one_day .element-select').remove();
 
             for(let user_id in data.users_shift) {
-                if(user_id == 3) {
-                    continue
-                }
                 if(data.login_user_id == user_id) {
                     if($('#shift_' + day).text() == "" ) {
                         $('.shift-select .select_one_day').append(
@@ -331,9 +328,6 @@ $(function(){
         }).done(function(data){
             $('.shift-details .details_one_day .element-detail').remove();
             for(let user_id in data.users_shift){
-                if(user_id == 3) {
-                    continue
-                }
                 if(data.users_shift[user_id].shift == "" || data.users_shift[user_id].shift == "休" || data.users_shift[user_id].shift == "×") {
                     continue;
                 }
