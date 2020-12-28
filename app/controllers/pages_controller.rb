@@ -40,11 +40,11 @@ class PagesController < ApplicationController
       end
     end
 
-    confirmed = false
+    @confirmed = false
     File.open("./app/views/pages/confirmed.txt", "r") do |f|
       f.each_line do |line|
         if line.to_s.gsub(/\R/, "") == "confirmed"
-          confirmed = true
+          @confirmed = true
         end
       end
     end
@@ -111,14 +111,13 @@ class PagesController < ApplicationController
       @shift_next_month = GuestNextMonth.find_by(user_id: @login_user.user_id)
     else  #従業員
       @shift_this_month = ThisMonth.find_by(user_id: @login_user.user_id)
-      if confirmed
+      if @confirmed
         @shift_next_month = NextMonth.find_by(user_id: @login_user.user_id)
       elsif saved
         @shift_next_month = SavedNextMonth.find_by(user_id: @login_user.user_id)
       else
         @shift_next_month = NextMonth.find_by(user_id: @login_user.user_id)
       end
-      
     end
     
     #日付情報インスタンス変数
