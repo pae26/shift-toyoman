@@ -9,7 +9,7 @@ $(function(){
             let deadline = new Date(this_year + "/" + this_month + "/19 23:59:59");
             let days_between = Math.ceil((deadline - now)/(1000 * 60 * 60 * 24));
             let ms = (deadline - now);
-            if (ms >= 0) {
+            if (ms >= 0 || true) {
                 let h = Math.floor(ms / 3600000);
                 let h_ = h % 24;
                 let m = Math.floor((ms - h * 3600000) / 60000);
@@ -232,11 +232,13 @@ $(function(){
         for(let i = 0; i < shortage_weeks.length; i++) {
             let day = (shortage_weeks[i].id).replace('shift_', "")
             let before_time = shortage_weeks[i].innerText;
+            if(before_time == '定休') {
+                continue
+            }
+            $('#day' + day + ' .' + weeks_to_english[week]).html(after_time);
             manageShortage(day, before_time, after_time);
         }
 
-
-        $('.' + weeks_to_english[week]).html(after_time);
         if(after_time == "×") {
             $(weeks_to_english[week]).removeClass('user_shift');
             $(weeks_to_english[week]).addClass('user_rest');
