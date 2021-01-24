@@ -85,8 +85,16 @@ $(function(){
         $('.nav').slideToggle();
     });
 
+    $('.mon').text('定休日');
+    $('.mon').parent().removeClass('shortage');
+    $('.shift_table').find('.selected-day .tue').eq(2).text('定休日');
+    $('.shift_table').find('.selected-day .tue').eq(2).parent().removeClass('shortage');
+    //$('.selected-day').find('tue').eq(2).removeClass('shortage');
 
     $('.selected-day').on('click',function(){
+        if($(this).children().hasClass('mon')) {
+            return false;
+        }
         let day_element = $(this).find("div");
         let day = (day_element[1].id).replace("shift_","");
         $.ajax({
