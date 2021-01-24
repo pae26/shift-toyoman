@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get "pages/usage_manager"=> "pages#usage_manager"
   get "pages/inquiry" => "pages#inquiry"
   post "pages/send_inquiry" => "pages#send_inquiry"
+  get "pages/update_log" => "pages#update_log"
   get "pages/change_password" => "pages#change_password"
   post "pages/change_password" => "pages#changed_password"
   

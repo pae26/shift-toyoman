@@ -401,6 +401,10 @@ class PagesController < ApplicationController
     end
   end
 
+  def update_log
+    
+  end
+
   def change_password
 
   end

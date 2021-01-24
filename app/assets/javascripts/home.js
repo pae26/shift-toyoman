@@ -9,7 +9,7 @@ $(function(){
             let deadline = new Date(this_year + "/" + this_month + "/19 23:59:59");
             let days_between = Math.ceil((deadline - now)/(1000 * 60 * 60 * 24));
             let ms = (deadline - now);
-            if (ms >= 0 || true) {
+            if (ms >= 0) {
                 let h = Math.floor(ms / 3600000);
                 let h_ = h % 24;
                 let m = Math.floor((ms - h * 3600000) / 60000);

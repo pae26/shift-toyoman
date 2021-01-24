@@ -903,7 +903,80 @@ html.modalset {
 }
 
 
-
+.updatelog-container {
+    max-width: 700px;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+.updatelog-item {
+    //border-left: #888;
+    padding-bottom: 50px;
+    font-size: .95rem;
+    padding-left: 44px;
+    position: relative;
+}
+.updatelog-item:first-child {
+    padding-top: 0;
+}
+.updatelog-item::before {
+    content: "";
+    position: absolute;
+    background: rgb(173, 173, 173);
+    width: 3px;
+    left: 9px;
+    top: 0;
+    bottom: 0;
+}
+.updatelog-date {
+    display: block;
+    font-weight: 700;
+    position: relative;
+    font-size: 25px;
+    /*padding-top: 33px;*/
+    padding-bottom: 12px;
+}
+.updatelog-date::before {
+    position: absolute;
+    content: "";
+    left: -45px;
+    /*top: 37px;*/
+    width: 17px;
+    height: 17px;
+    background: #404f70;
+    border-radius: 50%;
+    border: 3px solid #eff5fc;
+}
+.updatelog-body {
+    margin-top: 20px;
+    font-size: 15px;
+}
+.updatelog-manager-topic,
+.updatelog-employee-topic,
+.updatelog-add,
+.updatelog-fix,
+.updatelog-new {
+    color: #fff;
+    padding: 5px 15px;
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 12px;
+}
+.updatelog-manager-topic {
+    background-color: #00133d;
+}
+.updatelog-employee-topic {
+    background-color: #002d8f;
+}
+.updatelog-add {
+    background-color: rgb(74, 226, 74);
+}
+.updatelog-fix {
+    background-color: rgb(253, 25, 25);
+}
+.updatelog-new {
+    background-color: rgb(255, 255, 49);
+    color: #000;
+}
 
 @media(max-width: 767px){
     header {
