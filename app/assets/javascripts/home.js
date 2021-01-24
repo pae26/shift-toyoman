@@ -87,12 +87,12 @@ $(function(){
     });
 
     //定休日処理
-    $('.mon').text('定休日');
+    $('.mon').text('定休');
     $('.mon').parent().removeClass('shortage');
-    $('.shift_table').find('.selected-day .tue').eq(2).text('定休日');
+    $('.shift_table').find('.selected-day .tue').eq(2).text('定休');
     $('.shift_table').find('.selected-day .tue').eq(2).parent().removeClass('shortage');
     $('.shift_table').find('.selected-day .tue').eq(2).parent().addClass('third-tuesday');
-    $('.shift_table').find('.determine-day .tue').eq(2).text('定休日');
+    $('.shift_table').find('.determine-day .tue').eq(2).text('定休');
     $('.shift_table').find('.determine-day .tue').eq(2).parent().addClass('third-tuesday');
 
     $('.selected-day').on('click',function(){
