@@ -46,6 +46,7 @@ $(function(){
     }
     limitCounter();
 
+    //人手不足判定関数
     function manageShortage(day, before_time, after_time) {
         if(before_time == "" || before_time == "×") {
             if(!(after_time == "" || after_time == "×")) {
@@ -85,14 +86,15 @@ $(function(){
         $('.nav').slideToggle();
     });
 
+    //定休日処理
     $('.mon').text('定休日');
     $('.mon').parent().removeClass('shortage');
     $('.shift_table').find('.selected-day .tue').eq(2).text('定休日');
     $('.shift_table').find('.selected-day .tue').eq(2).parent().removeClass('shortage');
-    //$('.selected-day').find('tue').eq(2).removeClass('shortage');
+    $('.shift_table').find('.selected-day .tue').eq(2).parent().addClass('third-tuesday');
 
     $('.selected-day').on('click',function(){
-        if($(this).children().hasClass('mon')) {
+        if($(this).children().hasClass('mon') || $(this).hasClass('third-tuesday')) {
             return false;
         }
         let day_element = $(this).find("div");
@@ -245,9 +247,6 @@ $(function(){
         $('.shift-week-time').html("希望時間を選択");
         $('#weekAllModal').fadeOut(200);
         $('html').removeClass('modalset');
-
-        
-
     });
 
     $('.blank-all-write').on('click', function(){
