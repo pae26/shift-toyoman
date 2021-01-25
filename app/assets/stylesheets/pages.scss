@@ -909,7 +909,6 @@ html.modalset {
     margin-top: 50px;
 }
 .updatelog-item {
-    //border-left: #888;
     padding-bottom: 50px;
     font-size: .95rem;
     padding-left: 44px;
@@ -932,14 +931,12 @@ html.modalset {
     font-weight: 700;
     position: relative;
     font-size: 25px;
-    /*padding-top: 33px;*/
     padding-bottom: 12px;
 }
 .updatelog-date::before {
     position: absolute;
     content: "";
     left: -45px;
-    /*top: 37px;*/
     width: 17px;
     height: 17px;
     background: #404f70;
@@ -949,6 +946,9 @@ html.modalset {
 .updatelog-body {
     margin-top: 20px;
     font-size: 15px;
+}
+.updatelog-topic-item {
+    margin-bottom: 10px;
 }
 .updatelog-manager-topic,
 .updatelog-employee-topic,
@@ -1120,6 +1120,25 @@ html.modalset {
         text-align: left;
         margin: 10px auto 100px;
     }
+
+
+    .updatelog-container {
+        max-width: 80%;
+    }
+    /*.updatelog-manager-topic,
+    .updatelog-employee-topic,
+    .updatelog-add,
+    .updatelog-fix,
+    .updatelog-new {
+        margin-right: 5px;
+        margin-top: 30px;
+    }*/
+    /*.updatelog-body {
+        float: none;
+    }
+    .updatelog-body-item {
+        float: none;
+    }*/
 }
 
 @media(max-width: 376px){
