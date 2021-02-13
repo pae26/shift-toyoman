@@ -954,8 +954,11 @@ html.modalset {
     border-radius: 50%;
     border: 3px solid #eff5fc;
 }
-.updatelog-body {
+.updatelog-body-item {
     margin-top: 20px;
+}
+.updatelog-body {
+    margin-bottom: 10px;
     font-size: 15px;
 }
 .updatelog-topic-item {
