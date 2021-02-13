@@ -81,6 +81,9 @@ $(function(){
     }
 
     $('#logo').css('float', 'left');
+    $('.change-to-determined').hide();
+    $('#saved_table').hide();
+    $('.save-text').hide();
 
     $('#menu-toggle').on('click', function(){
         $('.nav').slideToggle();
@@ -94,6 +97,8 @@ $(function(){
     $('.shift_table').find('.selected-day .tue').eq(2).parent().addClass('third-tuesday');
     $('.shift_table').find('.determine-day .tue').eq(2).text('定休');
     $('.shift_table').find('.determine-day .tue').eq(2).parent().addClass('third-tuesday');
+    $('.shift_table').find('.save-day .tue').eq(2).text('定休');
+    $('.shift_table').find('.save-day .tue').eq(2).parent().addClass('third-tuesday');
 
     $('.selected-day').on('click',function(){
         if($(this).children().hasClass('mon') || $(this).hasClass('third-tuesday')) {
@@ -370,6 +375,68 @@ $(function(){
     $('.determine-modal .determine-modal-bg, .determine-modal .determine-modal-close, .close').on('click', function(){
         $('.shift-time').html("希望時間を選択");
         $('#determineModal').fadeOut(200);
+        $('html').removeClass('modalset');
+    });
+
+    $('#change-to-saved-btn').on('click', function(){
+        $('.save-text').show();
+        $('#determined_table').fadeOut(501);
+        $('.change-to-saved').fadeOut(501);
+        setTimeout(function(){
+            $('#saved_table').fadeIn(501);
+            $('.change-to-determined').fadeIn(501);
+        }, 501);
+    });
+
+    $('#change-to-determined-btn').on('click', function(){
+        $('.save-text').hide();
+        $('#saved_table').fadeOut(501);
+        $('.change-to-determined').fadeOut(501);
+        setTimeout(function(){
+            $('#determined_table').fadeIn(501);
+            $('.change-to-saved').fadeIn(501);
+        }, 501);
+    });
+
+    
+    $('.save-day').on('click', function(){
+        if($(this).children().hasClass('mon') || $(this).hasClass('third-tuesday')) {
+            return false;
+        }
+        let day_element = $(this).find("div");
+        let day = (day_element[1].id).replace("shift_", "");
+        $.ajax({
+            dataType: 'json',
+            type: 'POST',
+            url: '/saved_day',
+            data: {
+                day: "day" + day,
+            },
+        }).done(function(data){
+            $('.shift-details .details_one_day .element-detail').remove();
+            for(let user_id in data.users_shift){
+                if(data.users_shift[user_id].shift == "" || data.users_shift[user_id].shift == "休" || data.users_shift[user_id].shift == "×") {
+                    continue;
+                }
+                $('.shift-details .details_one_day').append(
+                    '<tr class="element-detail">' +
+                        '<td class="element-name">' + data.users_shift[user_id].name + '</td>' +
+                        '<td class="element-time">' + data.users_shift[user_id].shift + '</td>' +
+                    '</tr>'
+                );
+            }
+            $('#saveModal').fadeIn(200);
+            $('html').addClass('modalset');
+            $('.shift-details').show();
+            $('.shift-details').attr("data-determineday", day + "日");
+        }).fail(function(data){
+            alert('通信失敗', data);
+        });
+    });
+
+    $('.save-modal .save-modal-bg, .save-modal .save-modal-close, .close').on('click', function(){
+        $('.shift-time').html("希望時間を選択");
+        $('#saveModal').fadeOut(200);
         $('html').removeClass('modalset');
     });
 });

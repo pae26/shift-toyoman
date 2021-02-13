@@ -103,7 +103,10 @@ td[class^="login"],td[class^="prev_login"]{
 td[class*="login"].nobody{
     background-color:#ffce9e;
 }
-#submit, #confirm, #save{
+#submit,
+#confirm,
+#save
+{
     font-size: large;
     text-align: center;
     display: inline-block;
@@ -114,7 +117,9 @@ td[class*="login"].nobody{
     border-bottom: solid 4px #627295;
     border-radius: 3px;
 }
-#submit:active, #confirm:active, #save:active{
+#submit:active,
+#confirm:active,
+#save:active{
     -webkit-transform: translateY(4px);
     transform: translateY(4px);
     border-bottom: none;
@@ -545,7 +550,9 @@ span.msg {
 .confirm,
 .save,
 .week-all,
-.blank-all {
+.blank-all,
+.change-to-saved,
+.change-to-determined {
     text-align: center;
 }
 .save {
@@ -556,6 +563,8 @@ span.msg {
 #save-btn,
 #week-all-btn,
 #blank-all-btn,
+#change-to-saved-btn,
+#change-to-determined-btn,
 #export-btn-this button,
 #export-btn-next button {
     -webkit-appearance: none;
@@ -576,6 +585,8 @@ span.msg {
 #save-btn:active,
 #week-all-btn:active,
 #blank-all-btn:active,
+#change-to-saved-btn:active,
+#change-to-determined-btn:active,
 #export-btn-this:active,
 #export-btn-next:active {
 	-webkit-transform: translate(0,2px);

@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   post "/determine_day" => "pages#determine_day"
   post "/confirm_shift" => "pages#confirm_shift"
   post "/save_next_shift" => "pages#save_next_shift"
+  post "/saved_day" => "pages#saved_day"
   
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

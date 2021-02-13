@@ -265,14 +265,14 @@
 </div>
 
 <div class="headline_div">
-    <h2 class="headline">　<%= @month_info[:this_month] %>月シフト表　</h2>
+    <h2 class="headline">　<%= @month_info[:this_month] %>月シフト<span class="save-text">希望</span>表　</h2>
 </div>
 
 <% is_end = false %>
 <% is_first_week = true %>
 <% day_count = 1 %>
 
-<table class="shift_table">
+<table class="shift_table" id="determined_table">
     <% @month_info[:weeks].each do |week| %>
         <td><%= week %></td>
     <% end %>
@@ -338,4 +338,81 @@
             </div>
         </div>
     </div>
+</div>
+
+<div class="change-to-saved">
+    <button type="button" id="change-to-saved-btn">希望シフトを表示</button>
+</div>
+
+
+
+<table class="shift_table" id="saved_table">
+    <% @month_info[:weeks].each do |week| %>
+        <td><%= week %></td>
+    <% end %>
+    <% is_end = false %>
+    <% is_first_week = true %>
+    <% day_count = 1 %>
+    <% until is_end do %>
+        <tr>
+            <% for i in 0..6 %>
+                <% if is_first_week && i < @month_info[:this_beginning_month_day].wday #日数不足分(先月の「〜月末」)%>
+                    <% num = @month_info[:prev_end_month_day] -  @month_info[:this_beginning_month_day].wday + i + 1 %>
+                    <td class="is-disabled">
+                        <%= num %>
+                    </td>
+                <% elsif day_count > @month_info[:this_end_month_day] #日数超過分(来月の「月初〜」) %>
+                    <% num = day_count - @month_info[:this_end_month_day] %>
+                    <td class="is-disabled">
+                        <%= num %>
+                    </td>
+                    <% day_count += 1 %>
+                    <% if i == 6 %>
+                        <% is_end = true %>
+                    <% end %>
+                <% else #今月分 %>
+                    <% if day_count == @month_info[:today] #今日 %>
+                        <td class="save-day today data-day=<%= day_count %>">
+                    <% else %>
+                        <td class="save-day data-day=<%= day_count %>">
+                    <% end %>
+                        <div class="shift-day">
+                            <%= day_count %>
+                        </div>
+                        <% day_symbol = ("day" + day_count.to_s).to_sym %>
+                        <div class="user_shift <%= @month_info[:weeks_english][i] %>" id="shift_<%= day_count %>"><%= @shift_saved_this_month[day_symbol] %></div>
+                        <% if i == 6 && day_count == @month_info[:this_end_month_day] %>
+                            <% is_end = true %>
+                        <% end %>
+                    </td>
+                    <% day_count += 1 %>
+                <% end %>
+            <% end %>
+        </tr>
+        <% is_first_week = false %>
+    <% end %>
+</table>
+
+
+<div id="saveModal" class="save-modal">
+    <div class="save-modal-wrap">
+        <div class="save-modal-bg"></div>
+        <div class="shift-details" data-determineday=''>
+            <div class="close-item">
+                <i class="fas fa-times close"></i>
+            </div>
+            <div class="shift-item">
+            <table border="0" class="details_one_day">
+                <tr>
+                    <th class="heading">従業員</th>
+                    <th class="heading">シフト</th>
+                </tr>
+            </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="change-to-determined">
+    <button type="button" id="change-to-determined-btn">確定シフトを表示</button>
 </div>

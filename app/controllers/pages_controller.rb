@@ -109,8 +109,10 @@ class PagesController < ApplicationController
     if @login_user.user_id == 999 || @login_user.user_id == 9999  #ゲスト
       @shift_this_month = GuestThisMonth.find_by(user_id: @login_user.user_id)
       @shift_next_month = GuestNextMonth.find_by(user_id: @login_user.user_id)
+      @shift_saved_this_month = GuestThisMonth.find_by(user_id: @login_user.user_id)
     else  #従業員
       @shift_this_month = ThisMonth.find_by(user_id: @login_user.user_id)
+      @shift_saved_this_month = SavedNextMonth.find_by(user_id: @login_user.user_id)
       if @confirmed
         @shift_next_month = NextMonth.find_by(user_id: @login_user.user_id)
       elsif saved
@@ -381,6 +383,35 @@ class PagesController < ApplicationController
       format.html 
       format.json {render action: :home, json: {
           result: "OK",
+        }
+      }
+    end
+  end
+
+  def saved_day
+    if @login_user.user_id == 999
+      users = GuestThisMonth.all  #where.not("#{params[:day]} LIKE ?", "NULL")
+    else
+      #users = ThisMonth.where.not("#{params[:day]} LIKE ?", "NULL")
+      users = SavedNextMonth.where.not("#{params[:day]} LIKE ?", "NULL")
+    end
+    
+    users_shift = {}
+    day_sym = params[:day].to_s.to_sym
+    users.each do |user|
+      user_id_sym = user.user_id.to_s.to_sym
+      if @login_user.user_id == 999
+        name = GuestUser.find_by(user_id: user.user_id).name
+      else
+        name = User.find_by(user_id: user.user_id).name
+      end
+      shift = user[day_sym]
+      users_shift[user_id_sym] = {name: name, shift: shift}
+    end
+    respond_to do |format|
+      format.html 
+      format.json {render json: {
+          users_shift: users_shift,
         }
       }
     end
