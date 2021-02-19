@@ -7,7 +7,7 @@ $(function(){
             let this_year = gon.month_info.this_year;
             let this_month = gon.month_info.this_month;
             let deadline = new Date(this_year + "/" + this_month + "/19 23:59:59");
-            let days_between = Math.ceil((deadline - now)/(1000 * 60 * 60 * 24));
+            let days_between = Math.floor((deadline - now)/(1000 * 60 * 60 * 24));
             let ms = (deadline - now);
             if (ms >= 0) {
                 let h = Math.floor(ms / 3600000);
