@@ -6,11 +6,11 @@
     <h2 class="headline">　<%= @month_info[:next_month] %>月シフト<%= @submit_or_confirmed %>　</h2>
 </div>
 
-<% if @login_user.user_id != 999 %>
+<% if !(@confirmed) && @login_user.user_id != 999 %>
 <div class="info-item">
     <div class="info">
         <i class="fas fa-exclamation-circle notice"></i>
-        不具合で3月の提出シフトが正しく表示されていません。すぐに修正します！
+        不具合で3月の提出シフトが正しく表示されていません
     </div>
 </div>
 <% end %>
