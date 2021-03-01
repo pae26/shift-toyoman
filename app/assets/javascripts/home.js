@@ -84,6 +84,7 @@ $(function(){
     $('.change-to-determined').hide();
     $('#saved_table').hide();
     $('.save-text').hide();
+    $('.info').hide();
 
     $('#menu-toggle').on('click', function(){
         $('.nav').slideToggle();
@@ -380,6 +381,9 @@ $(function(){
 
     $('#change-to-saved-btn').on('click', function(){
         $('.save-text').show();
+        if(gon.login_user_id != 999) {
+            $('.info').show();
+        }
         $('#determined_table').fadeOut(501);
         $('.change-to-saved').fadeOut(501);
         setTimeout(function(){
@@ -390,6 +394,9 @@ $(function(){
 
     $('#change-to-determined-btn').on('click', function(){
         $('.save-text').hide();
+        if(gon.login_user_id != 999) {
+            $('.info').hide();
+        }
         $('#saved_table').fadeOut(501);
         $('.change-to-determined').fadeOut(501);
         setTimeout(function(){
