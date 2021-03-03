@@ -63,14 +63,7 @@ $(function(){
                     $('#day' + day).addClass('shortage');
                 }
             }
-            else {
-                gon.shortage[day]['in_time'] += 1;
-                if(gon.shortage[day]['in_time'] >= gon.shortage[day]['border']) {
-                    $('#day' + day).removeClass('shortage');
-                }
-            }
         }
-        console.log(gon.shortage);
     };
 
     for(let shortage_day in gon.shortage) {
