@@ -53,53 +53,9 @@ class PagesController < ApplicationController
     if @login_user.user_id == 999 || @login_user.user_id == 9999  #ゲスト
       shift_all_next_month = GuestNextMonth.all.order(id: "ASC")
     else
-      #shift_all_next_month = NextMonth.all.order(user_id: "ASC")
-
-      File.open("./app/views/pages/month.txt", "r") do |f|
-        f.each_line do |line|
-          #月替り時
-          unless line.to_s.gsub(/\R/, "") == this_month.to_s
-            month_changed = true
-  
-            #ThisMonthの値をNextMonthに変えてNextMonthを白紙に
-            NextMonth.all.order(user_id: "ASC").each do |user_next_month|
-              user_this_month = ThisMonth.find_by(user_id: user_next_month.user_id)
-              for day in 1..31
-                day_sym = ("day" + day.to_s).to_sym
-                user_this_month[day_sym] = user_next_month[day_sym]
-                user_next_month[day_sym] = ""
-              end
-              user_next_month.save
-              user_this_month.save
-            end
-          end
-        end
-      end
-
       shift_all_next_month = NextMonth.all.order(user_id: "ASC")
-
-      if month_changed
-        File.open("./app/views/pages/month.txt", "w") do |f|
-          f.puts(this_month)
-        end
-        File.open("./app/views/pages/confirmed.txt", "w") do |f|
-          f.puts("not")
-        end
-        File.open("./app/views/pages/saved.txt", "w") do |f|
-          f.puts("not")
-        end
-
-        user_saved_next_month = SavedNextMonth.all.order(user_id: "ASC")
-        user_saved_next_month.each do |saved_next_month|
-          user_saved_this_month = SavedThisMonth.find_by(user_id: saved_next_month.user_id)
-          for day in 1..31
-            day_sym = ("day" + day.to_s).to_sym
-            user_saved_this_month[day_sym] = saved_next_month[day_sym]
-          end
-          user_saved_this_month.save
-        end
-      end
     end
+
 
     if (today >= 20 && today <= 31 ) && !(@login_user.user_id == 999 || @login_user.user_id == 9999)
       #20日以降かつ編集が保存されていない場合
