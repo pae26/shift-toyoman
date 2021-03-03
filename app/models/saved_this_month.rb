@@ -1,0 +1,2 @@
+class SavedThisMonth < ApplicationRecord
+end

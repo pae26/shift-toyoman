@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_11_101207) do
+ActiveRecord::Schema.define(version: 2021_03_01_140455) do
 
   create_table "guest_next_months", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "user_id"
@@ -131,6 +131,43 @@ ActiveRecord::Schema.define(version: 2020_12_11_101207) do
   end
 
   create_table "saved_next_months", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "day1"
+    t.string "day2"
+    t.string "day3"
+    t.string "day4"
+    t.string "day5"
+    t.string "day6"
+    t.string "day7"
+    t.string "day8"
+    t.string "day9"
+    t.string "day10"
+    t.string "day11"
+    t.string "day12"
+    t.string "day13"
+    t.string "day14"
+    t.string "day15"
+    t.string "day16"
+    t.string "day17"
+    t.string "day18"
+    t.string "day19"
+    t.string "day20"
+    t.string "day21"
+    t.string "day22"
+    t.string "day23"
+    t.string "day24"
+    t.string "day25"
+    t.string "day26"
+    t.string "day27"
+    t.string "day28"
+    t.string "day29"
+    t.string "day30"
+    t.string "day31"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "saved_this_months", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "user_id"
     t.string "day1"
     t.string "day2"
