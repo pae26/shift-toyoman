@@ -70,6 +70,7 @@ $(function(){
                 }
             }
         }
+        console.log(gon.shortage);
     };
 
     for(let shortage_day in gon.shortage) {
@@ -234,7 +235,7 @@ $(function(){
             '土曜日':'sat',
         };
 
-        let shortage_weeks = $('.' + weeks_to_english[week]).get();
+        let shortage_weeks = $('.selected-day .' + weeks_to_english[week]).get();
         for(let i = 0; i < shortage_weeks.length; i++) {
             let day = (shortage_weeks[i].id).replace('shift_', "")
             let before_time = shortage_weeks[i].innerText;
