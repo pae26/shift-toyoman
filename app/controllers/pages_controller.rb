@@ -282,7 +282,7 @@ class PagesController < ApplicationController
 
   def determine_day
     if @login_user.user_id == 999
-      users = GuestThisMonth.all  #where.not("#{params[:day]} LIKE ?", "NULL")
+      users = GuestThisMonth.all
     else
       users = ThisMonth.where.not("#{params[:day]} LIKE ?", "NULL")
     end
@@ -363,9 +363,8 @@ class PagesController < ApplicationController
 
   def saved_day
     if @login_user.user_id == 999
-      users = GuestThisMonth.all  #where.not("#{params[:day]} LIKE ?", "NULL")
+      users = GuestThisMonth.all
     else
-      #users = ThisMonth.where.not("#{params[:day]} LIKE ?", "NULL")
       users = SavedNextMonth.where.not("#{params[:day]} LIKE ?", "NULL")
     end
     

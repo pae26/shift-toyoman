@@ -26,13 +26,7 @@ class AuthController < ApplicationController
                 user_this_month = ThisMonth.find_by(user_id: user_next_month.user_id)
                 for day in 1..31
                   day_sym = ("day" + day.to_s).to_sym
-                  #if user_next_month[day_sym] == "定休"
-                  #  user_this_month[day_sym] = "rh"
-                  #elsif user_next_month[day_sym] == "休"
-                  #  user_this_month[day_sym] = "h"
-                  #else
                   user_this_month[day_sym] = user_next_month[day_sym]
-                  #end
                   user_next_month[day_sym] = ""
                 end
                 user_next_month.save

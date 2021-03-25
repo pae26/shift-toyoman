@@ -1,5 +1,3 @@
-<!--<div class="test">ajax</div>-->
-
 <%= javascript_include_tag "home" %>
 
 <div class="headline_div">
@@ -31,29 +29,25 @@
                         <% is_end = true %>
                     <% end %>
                 <% else #翌月分 %>
-                    <% #if @month_info[:today] < 20 || @login_user.user_id == 999 %>
-                        <td class="selected-day data-day=<%= day_count %>" id="day<%= day_count %>">
-                    <% #else %>
-                        <!--<td class="data-day=<%= day_count %>" id="day<%= day_count %>">-->
-                    <% #end %>
-                        <div class="shift-day">
-                            <%= day_count %>
-                        </div>
-                        <% day_symbol = ("day" + day_count.to_s).to_sym %>
-                        <% if @shift_next_month[day_symbol] == "×" || @shift_next_month[day_symbol] == "" || @shift_next_month[day_symbol] == "h" #休み %>
-                            <% if @confirmed %>
-                                <div class="user_rest <%= @month_info[:weeks_english][i] %>" id="shift_<%= day_count %>">休</div>
-                            <% else %>
-                                <div class="user_rest <%= @month_info[:weeks_english][i] %>" id="shift_<%= day_count %>"><%= @shift_next_month[day_symbol] %></div>
-                            <% end %>
-                        <% elsif @shift_next_month[day_symbol] == "rh" %>
-                            <div class="user_shift <%= @month_info[:weeks_english][i] %>" id="shift_<%= day_count %>">定休</div>
-                        <% else #出勤 %>
-                            <div class="user_shift <%= @month_info[:weeks_english][i] %>" id="shift_<%= day_count %>"><%= @shift_next_month[day_symbol] %></div>
+                    <td class="selected-day data-day=<%= day_count %>" id="day<%= day_count %>">
+                    <div class="shift-day">
+                        <%= day_count %>
+                    </div>
+                    <% day_symbol = ("day" + day_count.to_s).to_sym %>
+                    <% if @shift_next_month[day_symbol] == "×" || @shift_next_month[day_symbol] == "" || @shift_next_month[day_symbol] == "h" #休み %>
+                        <% if @confirmed %>
+                            <div class="user_rest <%= @month_info[:weeks_english][i] %>" id="shift_<%= day_count %>">休</div>
+                        <% else %>
+                            <div class="user_rest <%= @month_info[:weeks_english][i] %>" id="shift_<%= day_count %>"><%= @shift_next_month[day_symbol] %></div>
                         <% end %>
-                        <% if i == 6 && day_count == @month_info[:next_end_month_day] %>
-                            <% is_end = true %>
-                        <% end %>
+                    <% elsif @shift_next_month[day_symbol] == "rh" %>
+                        <div class="user_shift <%= @month_info[:weeks_english][i] %>" id="shift_<%= day_count %>">定休</div>
+                    <% else #出勤 %>
+                        <div class="user_shift <%= @month_info[:weeks_english][i] %>" id="shift_<%= day_count %>"><%= @shift_next_month[day_symbol] %></div>
+                    <% end %>
+                    <% if i == 6 && day_count == @month_info[:next_end_month_day] %>
+                        <% is_end = true %>
+                    <% end %>
                     </td>
                     <% day_count += 1 %>
                 <% end %>
@@ -305,7 +299,7 @@
                             <%= day_count %>
                         </div>
                         <% day_symbol = ("day" + day_count.to_s).to_sym %>
-                        <% if @shift_this_month[day_symbol] == "h" #|| @shift_this_month[day_symbol] == "×" || @shift_this_month[day_symbol] == "" #休み %>
+                        <% if @shift_this_month[day_symbol] == "h" %>
                             <div class="user_rest <%= @month_info[:weeks_english][i] %>" id="shift_<%= day_count %>"><%= "休" %></div>
                         <% elsif @shift_this_month[day_symbol] == "rh" %>
                             <div class="user_rest <%= @month_info[:weeks_english][i] %>" id="shift_<%= day_count %>"><%= "定休" %></div>
