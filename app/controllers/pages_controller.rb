@@ -319,6 +319,9 @@ class PagesController < ApplicationController
       confirm_user = NextMonth.find_by(user_id: employee_id)
       
       params[:confirm_shift]["shift"].each do |day, shift_time|
+        if shift_time == "×" || shift_time == ""
+          shift_time = "h"
+        end
         confirm_user[day.to_sym] = shift_time
         confirm_user.save
       end

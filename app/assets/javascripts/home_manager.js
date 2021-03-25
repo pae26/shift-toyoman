@@ -9,6 +9,7 @@ $(function(){
 
     let date = new Date();
     let today = parseInt(date.getDate(), 10);
+    today = 2;
     let login_user_id = gon.login_user_id;
     if(today < 20 && login_user_id != 9999) {
         $('#not_edit h2').show();
@@ -81,8 +82,14 @@ $(function(){
             confirm_shift["shift"] = {};
             for(let j=1; j<=gon.next_end_month_day; j++) {
                 shift_one = $('#' + employee_name[i] + '_' + j +' > .edit-dropdown > .select > .edit-shift-time').text();
-                if(shift_one == "" || shift_one == "×") {
-                    shift_one = "休"
+                /*if(shift_one == "" || shift_one == "×") {
+                    shift_one = "休";
+                }
+                else if(shift_one == "rh") {
+                    shift_one = "定休";
+                }*/
+                if (shift_one == "定休") {
+                    shift_one = "rh"
                 }
 				confirm_shift["shift"]["day"+j] = shift_one;
             }
@@ -131,9 +138,9 @@ $(function(){
             save_next_shift["shift"] = {};
             for(let j=1; j<=gon.next_end_month_day; j++) {
                 shift_one = $('#' + employee_name[i] + '_' + j +' > .edit-dropdown > .select > .edit-shift-time').text();
-                /*if(shift_one == "" || shift_one == "×") {
-                    shift_one = "休"
-                }*/
+                if(shift_one == "定休") {
+                    shift_one = "rh";
+                }
 				save_next_shift["shift"]["day"+j] = shift_one;
             }
 
