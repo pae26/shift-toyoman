@@ -329,10 +329,7 @@ class PagesController < ApplicationController
 
     respond_to do |format|
       format.html 
-      format.json {render action: :home, json: {
-          result: "OK",
-        }
-      }
+      format.json {render action: :home, json: {result: "OK"}}
     end
   end
 
