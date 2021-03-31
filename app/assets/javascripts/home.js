@@ -113,7 +113,7 @@ $(function(){
 
             for(let user_id in data.users_shift) {
                 if(gon.confirmed){
-                    if(data.users_shift[user_id].shift == "" || data.users_shift[user_id].shift == "休" || data.users_shift[user_id].shift == "×") {
+                    if(data.users_shift[user_id].shift == "" || data.users_shift[user_id].shift == "休" || data.users_shift[user_id].shift == "×" || data.users_shift[user_id].shift == "h") {
                         continue;
                     }
                 }
@@ -351,7 +351,7 @@ $(function(){
         }).done(function(data){
             $('.shift-details .details_one_day .element-detail').remove();
             for(let user_id in data.users_shift){
-                if(data.users_shift[user_id].shift == "" || data.users_shift[user_id].shift == "休" || data.users_shift[user_id].shift == "×") {
+                if(data.users_shift[user_id].shift == "" || data.users_shift[user_id].shift == "休" || data.users_shift[user_id].shift == "×" || data.users_shift[user_id].shift == "h") {
                     continue;
                 }
                 $('.shift-details .details_one_day').append(

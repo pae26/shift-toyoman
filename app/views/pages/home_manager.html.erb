@@ -53,6 +53,8 @@
                                 <div class="select">
                                     <% if shift_one_next_month[day_sym] == "rh" %>
                                         <span class="edit-shift-time"><%= "定休" %></span>
+                                    <% elsif shift_one_next_month[day_sym] == "h" %>
+                                        <span class="edit-shift-time"><%= "休" %></span>
                                     <% else %>
                                         <span class="edit-shift-time"><%= shift_one_next_month[day_sym] %></span>
                                     <% end %>
@@ -210,7 +212,7 @@
                     <th class="confirmed_employee_name" id=<%= user_id %>><%= user_name %>
                     <% for i in 1..next_end_month_day %>
                         <% day_sym = ("day#{i}").to_sym %>
-                        <% if shift_one_next_month[day_sym] == nil || shift_one_next_month[day_sym] == "×" || shift_one_next_month[day_sym] == "" %>
+                        <% if shift_one_next_month[day_sym] == nil || shift_one_next_month[day_sym] == "×" || shift_one_next_month[day_sym] == "" || shift_one_next_month[day_sym] == "h" %>
                             <td id="<%= user_id %>_<%= i %>"><%= "休" %></td>
                         <% elsif shift_one_next_month[day_sym] == "rh" %>
                             <td id="<%= user_id %>_<%= i %>"><%= "定休" %></td>
@@ -264,7 +266,7 @@
                     <th class="confirmed_employee_name" id=<%= user_id %>><%= user_name %>
                     <% for i in 1..this_end_month_day %>
                     <% day_sym = ("day#{i}").to_sym %>
-                        <% if shift_one_this_month[day_sym] == nil || shift_one_this_month[day_sym] == "×" || shift_one_this_month[day_sym] == "" %>
+                        <% if shift_one_this_month[day_sym] == nil || shift_one_this_month[day_sym] == "×" || shift_one_this_month[day_sym] == "" || shift_one_this_month[day_sym] == "h" %>
                             <td id="<%= user_id %>_<%= i %>"><%= "休" %></td>
                         <% elsif shift_one_this_month[day_sym] == "rh" %>
                             <td id="<%= user_id %>_<%= i %>"><%= "定休" %></td>
