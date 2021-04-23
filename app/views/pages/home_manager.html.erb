@@ -261,6 +261,9 @@
                 <%
                 user_id = shift_one_this_month.user_id
                 user_name = @user_id_name[user_id.to_s.to_sym]
+                if user_id == 3 && @login_user.user_id == 1
+                        next
+                end
                 %>
                 <tr>
                     <th class="confirmed_employee_name" id=<%= user_id %>><%= user_name %>
