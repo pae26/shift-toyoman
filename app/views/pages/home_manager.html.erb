@@ -39,7 +39,7 @@
                     <%
                     user_id = shift_one_next_month.user_id
                     user_name = @user_id_name[user_id.to_s.to_sym]
-                    if user_id == 3 && @login_user.user_id == 1
+                    if (user_id == 3 || user_id == 13) && @login_user.user_id == 1
                         next
                     end
                     %>
@@ -204,7 +204,7 @@
                 <%
                 user_id = shift_one_next_month.user_id
                 user_name = @user_id_name[user_id.to_s.to_sym]
-                if user_id == 3 && @login_user.user_id == 1
+                if (user_id == 3 || user_id == 13) && @login_user.user_id == 1
                     next
                 end
                 %>
