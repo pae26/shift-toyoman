@@ -307,7 +307,7 @@
                             <%= day_count %>
                         </div>
                         <% day_symbol = ("day" + day_count.to_s).to_sym %>
-                        <% if @shift_this_month[day_symbol] == "h" %>
+                        <% if @shift_this_month[day_symbol] == "h" || @shift_this_month[day_symbol] == "×" %>
                             <div class="user_rest <%= @month_info[:weeks_english][i] %>" id="shift_<%= day_count %>"><%= "休" %></div>
                         <% elsif @shift_this_month[day_symbol] == "rh" %>
                             <div class="user_rest <%= @month_info[:weeks_english][i] %>" id="shift_<%= day_count %>"><%= "定休" %></div>
